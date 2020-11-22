@@ -4,20 +4,14 @@ This repository is my solutions to [Advent of Code, 2020](https://adventofcode.c
 
 ## Prerequisites
 
-### Golang
-
-If you don't have Golang installed, I recommend installing [`brew` ](https://brew.sh/) and running `brew install go`.
+You will need `git` and `go` installed. I recommend installing [`brew` ](https://brew.sh/) and running `brew install git go`.
 
 ## Running the Solutions
 
-Run the solutions directly from the code on GitHub by running e.g. the solution for day 1:
+Download or clone this repository and run the code locally. Like so:
 
 ```sh
-go run github.com/dds/aoc2020/day1
-```
-
-If you download or clone this repository, run the code locally with
-
-```sh
+git clone https://github.com/dds/aoc2020
+cd aoc2020
 go run ./day1
 ```
