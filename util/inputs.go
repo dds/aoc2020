@@ -10,60 +10,54 @@ import (
 var inputs []string
 
 // Returns the input for the given day, each line of the input parsed by the
-// parser function into strings. On error, returns nil or as much of the input
-// read so far and the error.
-func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
-	day = day - 1 // array index 0 == day 1
+// parser function into strings. Panics on error.
+func Input(day int, parser func(string) []string) [][]string {
 	if day > len(inputs) {
-		return nil, fmt.Errorf("no input for day %v", day)
+		panic(fmt.Errorf("no input for day %v", day))
 	}
 	lines := strings.Split(inputs[day], "\n")
 	r := make([][]string, 0)
 	for _, line := range lines {
-		fields, err := parser(line)
+		fields := parser(line)
 		if len(fields) == 0 {
 			continue
-		}
-		if err != nil {
-			return r, err
 		}
 		r = append(r, fields)
 	}
 
-	return r, nil
+	return r
 }
 
 // Returns the input as a two-dimensional array of float64.
-func InputNums(day int, parser func(string) ([]string, error)) ([][]float64, error) {
-	lines, err := Input(day, parser)
-	if err != nil {
-		return nil, err
-	}
+func InputNums(day int, parser func(string) []string) [][]float64 {
+	lines := Input(day, parser)
 
 	r := make([][]float64, len(lines))
+	var err error
 	for lineNo, fields := range lines {
 		nums := make([]float64, len(fields))
 		for i, f := range fields {
 			nums[i], err = strconv.ParseFloat(f, 64)
 			if err != nil {
-				return r, err
+				panic(err)
 			}
 		}
 		r[lineNo] = nums
 	}
 
-	return r, nil
+	return r
 }
 
 // CSVParser ...
-func CSVParser(input string) ([]string, error) {
-	r := strings.FieldsFunc(input, func(c rune) bool { return c == ',' })
-	return r, nil
+func CSVParser(input string) []string {
+	return strings.FieldsFunc(input, func(c rune) bool { return c == ',' })
 }
 
 func init() {
 	inputs = make([]string, 25)
 	inputs[0] = `1,2,3
 4,5,6
+7,8,9,10
 `
+	// As the inputs are released, store them right here inline. Simple.
 }
