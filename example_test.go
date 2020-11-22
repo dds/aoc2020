@@ -7,7 +7,7 @@ import (
 )
 
 func Example() {
-	input := util.InputNums(0, util.CSVParser)
+	input := util.InputInts(0, util.CSVParser)
 	for i, l := range input {
 		fmt.Println(i, l)
 	}

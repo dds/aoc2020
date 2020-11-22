@@ -29,7 +29,7 @@ func Input(day int, parser func(string) []string) [][]string {
 }
 
 // Returns the input as a two-dimensional array of float64.
-func InputNums(day int, parser func(string) []string) [][]float64 {
+func InputFloats(day int, parser func(string) []string) [][]float64 {
 	lines := Input(day, parser)
 
 	r := make([][]float64, len(lines))
@@ -41,6 +41,22 @@ func InputNums(day int, parser func(string) []string) [][]float64 {
 			if err != nil {
 				panic(err)
 			}
+		}
+		r[lineNo] = nums
+	}
+
+	return r
+}
+
+// Returns the input as a two-dimensional array of int.
+func InputInts(day int, parser func(string) []string) [][]int {
+	lines := InputFloats(day, parser)
+
+	r := make([][]int, len(lines))
+	for lineNo, fields := range lines {
+		nums := make([]int, len(fields))
+		for i, f := range fields {
+			nums[i] = int(f)
 		}
 		r[lineNo] = nums
 	}
