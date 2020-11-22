@@ -7,11 +7,11 @@ import (
 )
 
 func main() {
-	lines, err := util.InputInts(1)
+	input, err := util.InputInts(1, util.CSVParser)
 	if err != nil {
 		panic(err)
 	}
-	for i, l := range lines {
+	for i, l := range input {
 		fmt.Println(i, l)
 	}
 }

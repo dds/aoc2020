@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-// Input the input for the day given, each line of the input parsed by the
-// parser function into fields of any type. A slice of fields per line is
-// returned. Returns input read and error on invalid input.
+// Returns the input for the given day, each line of the input parsed by the
+// parser function into strings. On error, returns nil or as much of the input
+// read so far and the error.
 func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
 	var (
 		dir *os.File
@@ -48,13 +48,7 @@ func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
 }
 
 // Give the input for the given day as ints seperated by whitespace.
-func InputInts(day int) ([][]int, error) {
-	parser := func(input string) ([]string, error) {
-		// Split on whitespace into strings.
-		r := strings.Fields(input)
-		return r, nil
-	}
-
+func InputInts(day int, parser func(string) ([]string, error)) ([][]int, error) {
 	lines, err := Input(day, parser)
 	if err != nil {
 		return nil, err
@@ -72,5 +66,11 @@ func InputInts(day int) ([][]int, error) {
 		r[lineNo] = ints
 	}
 
+	return r, nil
+}
+
+// CSVParser ...
+func CSVParser(input string) ([]string, error) {
+	r := strings.FieldsFunc(input, func(c rune) bool { return c == ',' })
 	return r, nil
 }
