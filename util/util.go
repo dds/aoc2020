@@ -18,13 +18,16 @@ func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
 		return nil, fmt.Errorf("no input for day %v", day)
 	}
 	lines := strings.Split(inputs[day], "\n")
-	r := make([][]string, len(lines))
-	for lineNo, line := range lines {
+	r := make([][]string, 0)
+	for _, line := range lines {
 		fields, err := parser(line)
+		if len(fields) == 0 {
+			continue
+		}
 		if err != nil {
 			return r, err
 		}
-		r[lineNo] = fields
+		r = append(r, fields)
 	}
 
 	return r, nil
