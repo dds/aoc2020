@@ -17,7 +17,7 @@ func GetInput(day int, sessionCookie string) (r string, err error) {
 		return
 	}
 	if time.Now().Before(start) {
-		return "", fmt.Errorf("AoC %v does not begin until %v (-%v)", YEAR, start, start.Sub(time.Now()))
+		return "", fmt.Errorf("AoC %v does not begin until %v (-%v)", YEAR, start, time.Until(start))
 	}
 	var (
 		res *http.Response
