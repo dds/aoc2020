@@ -2,39 +2,22 @@ package util
 
 import (
 	"fmt"
-	"io/ioutil"
-	"os"
 	"strconv"
 	"strings"
 )
+
+// All puzzle inputs stored as an array of UTF-8 strings.
+var inputs []string
 
 // Returns the input for the given day, each line of the input parsed by the
 // parser function into strings. On error, returns nil or as much of the input
 // read so far and the error.
 func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
-	var (
-		dir *os.File
-		err error
-	)
-	if dir, err = os.Open("input"); err != nil {
-		return nil, err
-	}
-
-	var filenames []string
-	if filenames, err = dir.Readdirnames(30); err != nil {
-		return nil, err
-	}
-
-	if day > len(filenames) {
+	day = day - 1 // array index 0 == day 1
+	if day > len(inputs) {
 		return nil, fmt.Errorf("no input for day %v", day)
 	}
-
-	var b []byte
-	if b, err = ioutil.ReadFile("input/" + filenames[day-1]); err != nil {
-		return nil, err
-	}
-
-	lines := strings.Split(string(b), "\n")
+	lines := strings.Split(inputs[day], "\n")
 	r := make([][]string, len(lines))
 	for lineNo, line := range lines {
 		fields, err := parser(line)
