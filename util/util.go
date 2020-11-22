@@ -47,23 +47,23 @@ func Input(day int, parser func(string) ([]string, error)) ([][]string, error) {
 	return r, nil
 }
 
-// Give the input for the given day as ints seperated by whitespace.
-func InputInts(day int, parser func(string) ([]string, error)) ([][]int, error) {
+// Returns the input as a two-dimensional array of float64.
+func InputNums(day int, parser func(string) ([]string, error)) ([][]float64, error) {
 	lines, err := Input(day, parser)
 	if err != nil {
 		return nil, err
 	}
 
-	r := make([][]int, len(lines))
+	r := make([][]float64, len(lines))
 	for lineNo, fields := range lines {
-		ints := make([]int, len(fields))
+		nums := make([]float64, len(fields))
 		for i, f := range fields {
-			ints[i], err = strconv.Atoi(f)
+			nums[i], err = strconv.ParseFloat(f, 64)
 			if err != nil {
 				return r, err
 			}
 		}
-		r[lineNo] = ints
+		r[lineNo] = nums
 	}
 
 	return r, nil

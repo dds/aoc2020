@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	input, err := util.InputInts(1, util.CSVParser)
+	input, err := util.InputNums(1, util.CSVParser)
 	if err != nil {
 		panic(err)
 	}
