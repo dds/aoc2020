@@ -1,7 +1,6 @@
 package util
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 )
@@ -9,13 +8,9 @@ import (
 // All puzzle inputs stored as an array of UTF-8 strings.
 var Inputs []string
 
-// Returns the input for the given day, each line of the input parsed by the
-// parser function into strings. Panics on error.
-func ParseInput(day int, parser func(string) []string) [][]string {
-	if day > len(Inputs) {
-		panic(fmt.Errorf("no input for day %v", day))
-	}
-	lines := strings.Split(Inputs[day], "\n")
+// Parses each line of the input with the given parser function.
+func ParseInput(input string, parser func(string) []string) [][]string {
+	lines := strings.Split(input, "\n")
 	r := make([][]string, 0)
 	for _, line := range lines {
 		fields := parser(line)
@@ -29,8 +24,8 @@ func ParseInput(day int, parser func(string) []string) [][]string {
 }
 
 // Returns the input as a two-dimensional array of float64.
-func InputFloats(day int, parser func(string) []string) [][]float64 {
-	lines := ParseInput(day, parser)
+func InputFloats(input string, parser func(string) []string) [][]float64 {
+	lines := ParseInput(input, parser)
 
 	r := make([][]float64, len(lines))
 	var err error
@@ -49,8 +44,8 @@ func InputFloats(day int, parser func(string) []string) [][]float64 {
 }
 
 // Returns the input as a two-dimensional array of int.
-func InputInts(day int, parser func(string) []string) [][]int {
-	lines := InputFloats(day, parser)
+func InputInts(input string, parser func(string) []string) [][]int {
+	lines := InputFloats(input, parser)
 
 	r := make([][]int, len(lines))
 	for lineNo, fields := range lines {
