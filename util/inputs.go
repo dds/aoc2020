@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -35,6 +36,7 @@ func InputFloats(input string, parser func(string) []string) [][]float64 {
 		for i, f := range fields {
 			nums[i], err = strconv.ParseFloat(f, 64)
 			if err != nil {
+				fmt.Printf("error parsing line %v field %v as float %q: %v\n", lineNo, i, f, err)
 				nums[i] = math.NaN()
 			}
 		}
@@ -69,11 +71,22 @@ func CSVParser(input string) []string {
 	return strings.FieldsFunc(input, func(c rune) bool { return c == ',' })
 }
 
+// DashParser ...
+func DashParser(input string) []string {
+	return strings.FieldsFunc(input, func(c rune) bool { return c == '-' })
+}
+
+// Trimmer ...
+func TrimSpace(input []string) (r []string) {
+	for _, i := range input {
+		r = append(r, strings.TrimSpace(i))
+	}
+	return
+}
+
 func init() {
 	Inputs = make([]string, 25)
-	Inputs[0] = `1,2,3
-4,5,6
-7,8,9,10
-`
-	// As the inputs are released, store them right here inline. Simple.
+	Inputs[0] = testInput()
+	// As the inputs are released, add them to the Inputs slice.
+
 }
