@@ -1,6 +1,7 @@
 package util
 
 import (
+	"math"
 	"strconv"
 	"strings"
 )
@@ -34,7 +35,7 @@ func InputFloats(input string, parser func(string) []string) [][]float64 {
 		for i, f := range fields {
 			nums[i], err = strconv.ParseFloat(f, 64)
 			if err != nil {
-				panic(err)
+				nums[i] = math.NaN()
 			}
 		}
 		r[lineNo] = nums
@@ -51,6 +52,10 @@ func InputInts(input string, parser func(string) []string) [][]int {
 	for lineNo, fields := range lines {
 		nums := make([]int, len(fields))
 		for i, f := range fields {
+			if math.IsNaN(f) || math.IsInf(f, 0) {
+				nums[i] = 0
+				continue
+			}
 			nums[i] = int(f)
 		}
 		r[lineNo] = nums
