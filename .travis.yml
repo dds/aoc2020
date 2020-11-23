@@ -1,4 +1,7 @@
 language: go
+go:
+  - 1.15
+  - tip
 notifications:
   email:
     recipients: dds@bosabosa.org
