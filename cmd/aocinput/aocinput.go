@@ -19,19 +19,10 @@ var CLI struct {
 func main() {
 	kong.Parse(&CLI)
 	deadline := time.Now().Add(CLI.Timeout)
-	var (
-		s   string
-		err error
-	)
-	for s, err = util.GetInput(CLI.Day, CLI.Session); time.Now().Before(deadline); s, err = util.GetInput(1, CLI.Session) {
-		if err != nil {
-			panic(err)
-		}
-		if s == "" {
-			time.Sleep(3 * time.Second)
-			continue
-		}
-		break
+	s, err := util.GetInput(CLI.Day, CLI.Session)
+	for s == "" && time.Now().Before(deadline) {
+		time.Sleep(3 * time.Second)
+		s, err = util.GetInput(CLI.Day, CLI.Session)
 	}
 	if err != nil {
 		panic(err)

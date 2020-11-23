@@ -8,17 +8,25 @@ import (
 )
 
 const YEAR = 2020
-const start = "01 Dec 20 00:00 -0000"
+
+const startTime = "2020-12-01T00:00:00-05:00"
+
+var start time.Time
+
+func init() {
+	var err error
+	start, err = time.Parse(time.RFC3339, startTime)
+	if err != nil {
+		panic(err)
+	}
+}
 
 // GetInput returns the puzzle input for the given day.
 func GetInput(day int, sessionCookie string) (r string, err error) {
-	start, err := time.Parse(time.RFC822Z, start)
-	if err != nil {
-		return
-	}
 	if time.Now().Before(start) {
-		return "", fmt.Errorf("AoC %v does not begin until %v (-%v)", YEAR, start, time.Until(start))
+		return "", fmt.Errorf("AoC %v has not yet begun (%v)", YEAR, time.Until(start))
 	}
+
 	var (
 		res *http.Response
 		req *http.Request
