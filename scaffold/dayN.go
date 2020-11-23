@@ -9,5 +9,9 @@ import (
 var Input = util.Inputs[0]
 
 func main() {
-	fmt.Println(Input)
+	fmt.Println(part1(Input))
+}
+
+func part1(input string) (r string) {
+	return
 }
