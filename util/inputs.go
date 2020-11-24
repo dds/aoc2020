@@ -5,6 +5,8 @@ import (
 	"math"
 	"strconv"
 	"strings"
+
+	"github.com/dds/aoc2020/util/inputs"
 )
 
 // All puzzle inputs stored as an array of UTF-8 strings.
@@ -86,7 +88,7 @@ func TrimSpace(input []string) (r []string) {
 
 func init() {
 	Inputs = make([]string, 25)
-	Inputs[0] = testInput()
+	Inputs[0] = inputs.TestInput1()
 	// As the inputs are released, add them to the Inputs slice.
 
 }
