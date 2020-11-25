@@ -21,4 +21,4 @@ day1
 
 # Get input for day 20, wait up to 8h, and copy to clipboard if successful
 aocinput 20 --session=<session_cookie> --timeout=8h --clipboard
-```
+```test
