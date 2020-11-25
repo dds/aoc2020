@@ -24,8 +24,12 @@ jobs:
       run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
 
   release:
+    name: Release
+    runs-on: ubuntu-latest
     if: ${{ github.ref == 'main' }}
     needs: build
+    steps:
+
 
     - name: Conventional Changelog Action
       id: changelog
