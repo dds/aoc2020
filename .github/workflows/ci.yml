@@ -1,0 +1,45 @@
+name: ci
+
+on: [ push, pull_request ]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+
+    - name: Build
+      run: go build ./...
+
+    - name: Test
+      run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+  release:
+    if: ${{ github.ref == 'main' }}
+    needs: build
+
+    - name: Conventional Changelog Action
+      id: changelog
+      uses: TriPSs/conventional-changelog-action@v3
+      with:
+        github-token: ${{ secrets.github_token }}
+        output-file: "false"
+
+    - name: Create Release
+      uses: actions/create-release@v1
+      if: ${{ steps.changelog.outputs.skipped == 'false' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      with:
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        release_name: ${{ steps.changelog.outputs.tag }}
+        body: ${{ steps.changelog.outputs.clean_changelog }}
