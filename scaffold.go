@@ -5,9 +5,10 @@ import (
 	"testing"
 
 	"github.com/dds/aoc2020/lib"
+	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.Inputs[0]
+var Input = lib.ParseInput(lib.NumberParser, inputs.TestInput1())
 
 func Test(t *testing.T) {
 	// type test struct {
