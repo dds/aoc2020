@@ -12,8 +12,8 @@ func Example() {
 		fmt.Println(i, l)
 	}
 	// Output:
-	// error parsing line 1 field 3 as float "-": strconv.ParseFloat: parsing "-": invalid syntax
+	// error parsing line 1 field 3: strconv.ParseFloat: parsing "-": invalid syntax
 	// 0 [1 2 3]
-	// 1 [4 5 6 0]
+	// 1 [4 5 6]
 	// 2 [7 8 9 10]
 }

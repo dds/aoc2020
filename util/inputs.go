@@ -3,6 +3,7 @@ package util
 import (
 	"fmt"
 	"math"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -31,18 +32,24 @@ func ParseInput(input string, parser func(string) []string) [][]string {
 func InputFloats(input string, parser func(string) []string) [][]float64 {
 	lines := ParseInput(input, parser)
 
-	r := make([][]float64, len(lines))
-	var err error
+	r := make([][]float64, 0)
 	for lineNo, fields := range lines {
-		nums := make([]float64, len(fields))
+		nums := make([]float64, 0)
 		for i, f := range fields {
-			nums[i], err = strconv.ParseFloat(f, 64)
-			if err != nil {
-				fmt.Printf("error parsing line %v field %v as float %q: %v\n", lineNo, i, f, err)
-				nums[i] = math.NaN()
+			if f == "" {
+				continue
 			}
+			f, err := strconv.ParseFloat(f, 64)
+			if err != nil {
+				fmt.Printf("error parsing line %v field %v: %v\n", lineNo, i, err)
+				continue
+			}
+			nums = append(nums, f)
 		}
-		r[lineNo] = nums
+		if len(nums) == 0 {
+			continue
+		}
+		r = append(r, nums)
 	}
 
 	return r
@@ -84,6 +91,13 @@ func TrimSpace(input []string) (r []string) {
 		r = append(r, strings.TrimSpace(i))
 	}
 	return
+}
+
+var NumberRE = regexp.MustCompile(`[-+]?\d*\.?\d*`)
+
+// NumberParser ...
+func NumberParser(input string) []string {
+	return NumberRE.FindAllString(input, -1)
 }
 
 func init() {
