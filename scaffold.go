@@ -8,7 +8,7 @@ import (
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.ParseInput(inputs.TestInput(), lib.NumberParser)
+var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
 
 func Test(t *testing.T) {
 	// type test struct {
@@ -34,11 +34,11 @@ func main() {
 	fmt.Println(part2(Input))
 }
 
-func part1(input string) (rc int) {
+func part1(input [][]int) (rc int) {
 	fmt.Println(input)
 	return
 }
 
-func part2(input string) (rc int) {
+func part2(input [][]int) (rc int) {
 	return
 }
