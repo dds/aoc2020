@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"github.com/dds/aoc2020/util"
+	"github.com/dds/aoc2020/lib"
 )
 
 func Example() {
-	input := util.InputInts(util.Inputs[0], func(s string) []string { return util.TrimSpace(util.CSVParser(s)) })
+	input := lib.InputInts(lib.Inputs[0], lib.NumberParser)
 	for i, l := range input {
 		fmt.Println(i, l)
 	}

@@ -6,7 +6,7 @@ import (
 
 	"github.com/alecthomas/kong"
 	"github.com/atotto/clipboard"
-	"github.com/dds/aoc2020/util"
+	"github.com/dds/aoc2020/lib"
 )
 
 var CLI struct {
@@ -19,10 +19,10 @@ var CLI struct {
 func main() {
 	kong.Parse(&CLI)
 	deadline := time.Now().Add(CLI.Timeout)
-	s, err := util.GetInput(CLI.Day, CLI.Session)
+	s, err := lib.GetInput(CLI.Day, CLI.Session)
 	for s == "" && time.Now().Before(deadline) {
 		time.Sleep(3 * time.Second)
-		s, err = util.GetInput(CLI.Day, CLI.Session)
+		s, err = lib.GetInput(CLI.Day, CLI.Session)
 	}
 	if err != nil {
 		panic(err)
