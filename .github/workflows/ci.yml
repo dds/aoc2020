@@ -5,7 +5,7 @@ on: [ push, pull_request ]
 jobs:
 
   build:
-    name: Build
+    name: build
     runs-on: ubuntu-latest
     steps:
 
@@ -24,12 +24,11 @@ jobs:
       run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
 
   release:
-    name: Release
+    name: release
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'main' }}
     needs: build
     steps:
-
 
     - name: Conventional Changelog Action
       id: changelog

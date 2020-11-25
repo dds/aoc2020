@@ -1,6 +1,6 @@
 # Advent of Code 2020 (Golang)
 
-[![Build Status](https://travis-ci.com/dds/aoc2020.svg?branch=main)](https://travis-ci.com/github/dds/aoc2020)
+![Build Status](https://github.com/dds/aoc2020/workflows/ci/badge.svg)
 
 This repository is my solutions to [Advent of Code, 2020](https://adventofcode.com/2020).
 
