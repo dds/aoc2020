@@ -33,10 +33,11 @@ func main() {
 	fmt.Println(part2(Input))
 }
 
-func part1(input string) interface{} {
-	return ""
+func part1(input string) (rc int) {
+	fmt.Println(input)
+	return
 }
 
-func part2(input string) interface{} {
-	return ""
+func part2(input string) (rc int) {
+	return
 }
