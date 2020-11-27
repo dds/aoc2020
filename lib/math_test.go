@@ -1,10 +1,9 @@
-package lib_test
+package lib
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/dds/aoc2020/lib"
 	"github.com/stretchr/testify/require"
 )
 
@@ -32,7 +31,7 @@ func TestApplyReduce(t *testing.T) {
 					nums <- i
 				}
 			}()
-			require.Equal(t, test.expect, lib.Reduce(test.reducer, lib.Apply(test.applyer, nums)))
+			require.Equal(t, test.expect, Reduce(test.reducer, Apply(test.applyer, nums)))
 		})
 	}
 }
