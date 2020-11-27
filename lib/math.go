@@ -14,24 +14,23 @@ func Min(a, b int) int {
 	return b
 }
 
-func Reduce(f func(int, int) int, nums ...int) (r int) {
-	r = f(nums[0], nums[1])
-	for i := 2; i < len(nums); i++ {
-		r = f(r, nums[i])
+func Reduce(f func(int, int) int, c <-chan int) (r int) {
+	r = f(<-c, <-c)
+	for i := range c {
+		r = f(r, i)
 	}
 	return
 }
 
-func Apply(f func(int) int, nums ...int) (r []int) {
-	if len(nums) < 1 {
-		return
-	}
-	r = make([]int, len(nums))
-	copy(r, nums)
-	for i := 0; i < len(r); i++ {
-		r[i] = f(r[i])
-	}
-	return
+func Apply(f func(int) int, c <-chan int) <-chan int {
+	r := make(chan int)
+	go func() {
+		defer close(r)
+		for i := range c {
+			r <- f(i)
+		}
+	}()
+	return r
 }
 
 func Sign(a int) int {
