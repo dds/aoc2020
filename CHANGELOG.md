@@ -1,3 +1,7 @@
+## [1.0.8](https://github.com/dds/aoc2020/compare/v1.0.7...v1.0.8) (2020-11-30)
+
+
+
 ## [1.0.7](https://github.com/dds/aoc2020/compare/v1.0.6...v1.0.7) (2020-11-27)
 
 
@@ -11,15 +15,6 @@
 
 
 ## [1.0.4](https://github.com/dds/aoc2020/compare/v1.0.3...v1.0.4) (2020-11-25)
-
-
-
-## [1.0.3](https://github.com/dds/aoc2020/compare/v1.0.2...v1.0.3) (2020-11-25)
-
-
-### Bug Fixes
-
-* link to build status ([ee5d661](https://github.com/dds/aoc2020/commit/ee5d661729868801c0bcd76a9e2bfd8cbd67f890))
 
 
 
