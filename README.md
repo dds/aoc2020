@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/dds/aoc2020/workflows/ci/badge.svg)](https://github.com/dds/aoc2020/actions?query=workflow%3Aci)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This repository is my solutions to [Advent of Code, 2020](https://adventofcode.com/2020).
+This repo contains my solutions to [Advent of Code, 2020](https://adventofcode.com/2020).
 
 ## Prerequisites
 
@@ -22,4 +22,13 @@ day1
 
 # Get input for day 20, wait up to 8h, and copy to clipboard if successful
 aocinput 20 --session=<session_cookie> --timeout=8h --clipboard
+```
+
+## How To
+
+For each day, copy the `scaffold.go` file into a directory for the day, so day 1 you would:
+
+```sh
+mkdir day1
+cp scaffold.go day1/day1.go
 ```
