@@ -1,7 +1,7 @@
 package inputs
 
 func TestInput1() string {
-     return `1,2,3
+	return `1,2,3
 4,5,6,-,
 7,8.1,9,10
 `

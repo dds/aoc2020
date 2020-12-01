@@ -1,7 +1,7 @@
 package inputs
 
 func Day10() string {
-     return ``
+	return ``
 }
 
 // Local Variables:

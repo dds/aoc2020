@@ -1,7 +1,7 @@
 package inputs
 
 func Day1() string {
-     return `1429
+	return `1429
 1368
 1661
 1687
