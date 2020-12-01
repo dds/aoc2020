@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/dds/aoc2020/compare/v1.2.2...v1.3.0) (2020-12-01)
+
+
+### Features
+
+* day2 scaffold ([1d2ff60](https://github.com/dds/aoc2020/commit/1d2ff60ab62ca9dcc96c98bb775519349a26baf0))
+
+
+
 ## [1.2.2](https://github.com/dds/aoc2020/compare/v1.2.1...v1.2.2) (2020-12-01)
 
 
@@ -26,10 +35,6 @@
 ### Features
 
 * day1 scaffold ([b16bdf4](https://github.com/dds/aoc2020/commit/b16bdf479786b8ef5542de7f7654fcd35aba8a93))
-
-
-
-## [1.0.8](https://github.com/dds/aoc2020/compare/v1.0.7...v1.0.8) (2020-11-30)
 
 
 
