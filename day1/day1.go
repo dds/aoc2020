@@ -2,32 +2,12 @@ package main
 
 import (
 	"fmt"
-	"testing"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
 var Input = lib.InputInts(inputs.Day1(), lib.NumberParser)
-
-func Test(t *testing.T) {
-	// type test struct {
-	// 	input  int
-	// 	expect int
-	// }
-
-	// tests := []test{
-	// 	test{
-	// 		// ...
-	// 	},
-	// }
-
-	// for i, test := range tests {
-	// 	t.Run(fmt.Sprint(i), func(t *testing.T) {
-	// 		require.Equal(t, test.expect, test.input)
-	// 	})
-	// }
-}
 
 func main() {
 	fmt.Println(part1(Input))
@@ -53,6 +33,31 @@ func part2(input [][]int) (rc int) {
 					return input[i][0] * input[j][0] * input[k][0]
 				}
 			}
+		}
+	}
+	return
+}
+
+func part2_DictionaryApproach(input [][]int) (rc int) {
+	m := map[int][]int{}
+
+	for _, row := range input {
+		i := row[0]
+		if i > 2020 {
+			continue
+		}
+
+		for k, v := range m {
+			if !(k+i <= 2020 && len(v) < 3) {
+				continue
+			}
+			if len(v) == 2 && v[0]+v[1]+i == 2020 {
+				return v[0] * v[1] * i
+			}
+			m[k+i] = append(v, i)
+		}
+		if _, ok := m[i]; !ok {
+			m[i] = []int{i}
 		}
 	}
 	return
