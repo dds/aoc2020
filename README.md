@@ -2,6 +2,7 @@
 
 [![Build Status](https://github.com/dds/aoc2020/workflows/ci/badge.svg)](https://github.com/dds/aoc2020/actions?query=workflow%3Aci)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dds/aoc2020)](https://goreportcard.com/report/github.com/dds/aoc2020)
 
 This repo contains my solutions to [Advent of Code, 2020](https://adventofcode.com/2020).
 
