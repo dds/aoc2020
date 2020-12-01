@@ -15,7 +15,7 @@ func TestApplyReduce(t *testing.T) {
 		expect  int
 	}
 	tests := []test{
-		test{
+		{
 			applyer: func(x int) int { return x * x },
 			reducer: func(x, y int) int { return x + y },
 			input:   []int{1, -2, 3},
