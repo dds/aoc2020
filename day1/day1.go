@@ -35,10 +35,25 @@ func main() {
 }
 
 func part1(input [][]int) (rc int) {
-	fmt.Println(input)
+	for i := 0; i < len(input)-1; i++ {
+		for j := i; j < len(input); j++ {
+			if input[i][0]+input[j][0] == 2020 {
+				return input[i][0] * input[j][0]
+			}
+		}
+	}
 	return
 }
 
 func part2(input [][]int) (rc int) {
+	for i := 0; i < len(input)-2; i++ {
+		for j := i; j < len(input)-1; j++ {
+			for k := j; k < len(input); k++ {
+				if input[i][0]+input[j][0]+input[k][0] == 2020 {
+					return input[i][0] * input[j][0] * input[k][0]
+				}
+			}
+		}
+	}
 	return
 }
