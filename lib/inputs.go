@@ -101,7 +101,7 @@ func NumberParser(input string) []string {
 }
 
 func init() {
-	Inputs = make([]string, 25)
+	Inputs = make([]string, 26)
 	Inputs[0] = inputs.TestInput1()
 	Inputs[1] = inputs.Day1()
 	Inputs[2] = inputs.Day2()
