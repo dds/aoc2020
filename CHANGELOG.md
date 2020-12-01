@@ -1,3 +1,7 @@
+## [1.3.1](https://github.com/dds/aoc2020/compare/v1.3.0...v1.3.1) (2020-12-01)
+
+
+
 # [1.3.0](https://github.com/dds/aoc2020/compare/v1.2.2...v1.3.0) (2020-12-01)
 
 
@@ -26,15 +30,6 @@
 ### Features
 
 * input placeholders ([3634e90](https://github.com/dds/aoc2020/commit/3634e904d053a0b0ecd1a00626005881fe566e18))
-
-
-
-# [1.1.0](https://github.com/dds/aoc2020/compare/v1.0.8...v1.1.0) (2020-12-01)
-
-
-### Features
-
-* day1 scaffold ([b16bdf4](https://github.com/dds/aoc2020/commit/b16bdf479786b8ef5542de7f7654fcd35aba8a93))
 
 
 
