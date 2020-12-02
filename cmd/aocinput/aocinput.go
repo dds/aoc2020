@@ -10,15 +10,17 @@ import (
 )
 
 var CLI struct {
-	Clipboard bool
-	Day       int    `kong:"arg,required"`
-	Session   string `kong:"required"`
-	Timeout   time.Duration
-	Year      int
+	Clipboard bool          `short:"c"`
+	Day       int           `kong:"arg,required"`
+	Session   string        `kong:"required,short='s'"`
+	Timeout   time.Duration `short:"t"`
+	Year      int           `short:"y"`
 }
 
 func main() {
-	kong.Parse(&CLI)
+	kong.Parse(&CLI,
+		kong.Name("aocinput"),
+		kong.Description("Download Advent of Code Puzzle Inputs"))
 	if CLI.Year == 0 {
 		CLI.Year = time.Now().Year()
 	}
