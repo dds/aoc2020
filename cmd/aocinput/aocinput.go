@@ -10,11 +10,11 @@ import (
 )
 
 var CLI struct {
-	Clipboard bool          `short:"c"`
+	Clipboard bool          `short:"c" help:"Copy to window system clipboard on success."`
 	Day       int           `kong:"arg,required"`
-	Session   string        `kong:"required,short='s'"`
-	Timeout   time.Duration `short:"t"`
-	Year      int           `short:"y"`
+	Session   string        `kong:"required,short='s',help='Your personal session cookie from your browser.'"`
+	Timeout   time.Duration `short:"t" help:"Retry up to timeout. Examples: 8h,20s."`
+	Year      int           `short:"y" help:"Year. Default is current year."`
 }
 
 func main() {
