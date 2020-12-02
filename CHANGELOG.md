@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/dds/aoc2020/compare/v1.5.0...v1.5.1) (2020-12-02)
+
+
+### Bug Fixes
+
+* help ([88f7b3d](https://github.com/dds/aoc2020/commit/88f7b3d4149ebb43e366543085ff15d7602f79e2))
+
+
+
 # [1.5.0](https://github.com/dds/aoc2020/compare/v1.4.1...v1.5.0) (2020-12-02)
 
 
@@ -26,10 +35,6 @@
 ### Bug Fixes
 
 * fetch day when available ([c916054](https://github.com/dds/aoc2020/commit/c916054363cc4ceb028434e14055dcfa1f7c87e1))
-
-
-
-## [1.3.6](https://github.com/dds/aoc2020/compare/v1.3.5...v1.3.6) (2020-12-02)
 
 
 
