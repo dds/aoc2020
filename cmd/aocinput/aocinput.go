@@ -1,3 +1,5 @@
+// Install with `go get github.com/dds/aoc2020/cmd/aocinput`.
+
 package main
 
 import (
