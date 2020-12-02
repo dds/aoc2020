@@ -2,13 +2,25 @@ package main
 
 import (
 	"fmt"
+	"regexp"
+	"strconv"
 	"testing"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
+func parse(s string) []string {
+	// 1-4 s: lssss
+	re := regexp.MustCompile(`(\d+)-(\d+) (\w): (\w+)`)
+	matches := re.FindStringSubmatch(s)
+	if len(matches) == 0 {
+		return matches
+	}
+	return matches[1:]
+}
+
+var Input = lib.ParseInput(inputs.Day2(), parse)
 
 func Test(t *testing.T) {
 	// type test struct {
@@ -34,11 +46,31 @@ func main() {
 	fmt.Println(part2(Input))
 }
 
-func part1(input [][]int) (rc int) {
-	fmt.Println(input)
+func part1(input [][]string) (rc int) {
+	for _, data := range input {
+		a, b := data[0], data[1]
+		min, err := strconv.Atoi(a)
+		if err != nil {
+			panic(err)
+		}
+		max, err := strconv.Atoi(b)
+		if err != nil {
+			panic(err)
+		}
+		c := data[2]
+		n := 0
+		for _, s := range data[3] {
+			if string(s) == c {
+				n++
+			}
+		}
+		if min <= n && n <= max {
+			rc++
+		}
+	}
 	return
 }
 
-func part2(input [][]int) (rc int) {
+func part2(input [][]string) (rc int) {
 	return
 }
