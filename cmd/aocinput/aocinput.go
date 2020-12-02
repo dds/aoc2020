@@ -11,18 +11,22 @@ import (
 
 var CLI struct {
 	Clipboard bool
-	Day       int    `kong:"arg,required"`
+	Day       int `kong:"arg,required"`
+	Year      int
 	Session   string `kong:"required"`
 	Timeout   time.Duration
 }
 
 func main() {
 	kong.Parse(&CLI)
+	if CLI.Year == 0 {
+		CLI.Year = time.Now().Year()
+	}
 	deadline := time.Now().Add(CLI.Timeout)
-	s, err := lib.GetInput(CLI.Day, CLI.Session)
+	s, err := lib.GetInput(CLI.Year, CLI.Day, CLI.Session)
 	for s == "" && time.Now().Before(deadline) {
 		time.Sleep(3 * time.Second)
-		s, err = lib.GetInput(CLI.Day, CLI.Session)
+		s, err = lib.GetInput(CLI.Year, CLI.Day, CLI.Session)
 	}
 	if err != nil {
 		panic(err)
