@@ -1,3 +1,12 @@
+# [1.5.0](https://github.com/dds/aoc2020/compare/v1.4.1...v1.5.0) (2020-12-02)
+
+
+### Features
+
+* short form arguments ([689c01f](https://github.com/dds/aoc2020/commit/689c01f87e11c5015beb591baaa3bf0cbd721e9d))
+
+
+
 ## [1.4.1](https://github.com/dds/aoc2020/compare/v1.4.0...v1.4.1) (2020-12-02)
 
 
@@ -21,10 +30,6 @@
 
 
 ## [1.3.6](https://github.com/dds/aoc2020/compare/v1.3.5...v1.3.6) (2020-12-02)
-
-
-
-## [1.3.5](https://github.com/dds/aoc2020/compare/v1.3.4...v1.3.5) (2020-12-02)
 
 
 
