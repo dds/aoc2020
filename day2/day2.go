@@ -72,5 +72,22 @@ func part1(input [][]string) (rc int) {
 }
 
 func part2(input [][]string) (rc int) {
+	for _, data := range input {
+		a, b := data[0], data[1]
+		idx1, err := strconv.Atoi(a)
+		if err != nil {
+			panic(err)
+		}
+		idx1--
+		idx2, err := strconv.Atoi(b)
+		if err != nil {
+			panic(err)
+		}
+		idx2--
+		c := byte(data[2][0])
+		if (data[3][idx1] == c && data[3][idx2] != c) || (data[3][idx1] != c && data[3][idx2] == c) {
+			rc++
+		}
+	}
 	return
 }
