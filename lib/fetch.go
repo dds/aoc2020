@@ -23,8 +23,9 @@ func init() {
 
 // GetInput returns the puzzle input for the given day.
 func GetInput(day int, sessionCookie string) (r string, err error) {
+	start := start.Add(time.Duration(24*(day-1)) * time.Hour)
 	if time.Now().Before(start) {
-		return "", fmt.Errorf("AoC %v has not yet begun (%v)", YEAR, time.Until(start))
+		return "", fmt.Errorf("AoC %v Day %v has not yet begun (%v)", YEAR, day, time.Until(start))
 	}
 
 	var (
