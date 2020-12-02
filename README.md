@@ -25,11 +25,3 @@ day1
 aocinput 20 --session=<session_cookie> --timeout=8h --clipboard
 ```
 
-## How To
-
-For each day, copy the `scaffold.go` file into a directory for the day, so day 1 you would:
-
-```sh
-mkdir day1
-cp scaffold.go day1/day1.go
-```
