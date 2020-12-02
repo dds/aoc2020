@@ -11,10 +11,10 @@ import (
 
 var CLI struct {
 	Clipboard bool
-	Day       int `kong:"arg,required"`
-	Year      int
+	Day       int    `kong:"arg,required"`
 	Session   string `kong:"required"`
 	Timeout   time.Duration
+	Year      int
 }
 
 func main() {
