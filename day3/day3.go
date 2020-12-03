@@ -123,7 +123,7 @@ func euclidean_distance(p, q image.Point) float64 {
 // BFS path from p to q.
 func path(p, q image.Point, cost func(p, q image.Point) float64) (r []image.Point) {
 	que := []image.Point{p}
-	prevs := map[image.Point]image.Point{}
+	prevs := map[image.Point]*image.Point{}
 	for len(que) > 0 {
 		t := que[0]
 		if t == q {
@@ -133,7 +133,7 @@ func path(p, q image.Point, cost func(p, q image.Point) float64) (r []image.Poin
 		var next image.Point
 		minScore := math.Inf(1)
 		for _, u := range neighbors(t) {
-			if prevs[u] != (image.Point{}) {
+			if prevs[u] != nil {
 				continue
 			}
 			score := cost(u, q)
@@ -142,7 +142,7 @@ func path(p, q image.Point, cost func(p, q image.Point) float64) (r []image.Poin
 				next = u
 			}
 		}
-		prevs[next] = t
+		prevs[next] = &t
 		que = append(que, next)
 		r = append(r, next)
 	}
