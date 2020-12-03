@@ -10,7 +10,7 @@ import (
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 var Input = lib.ParseInput(inputs.Day3(), func(s string) []string { return strings.Split(s, "") })
