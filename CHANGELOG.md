@@ -1,3 +1,12 @@
+## [1.5.4](https://github.com/dds/aoc2020/compare/v1.5.3...v1.5.4) (2020-12-03)
+
+
+### Bug Fixes
+
+* remove unnecessary additional '\n' ([528bbb8](https://github.com/dds/aoc2020/commit/528bbb82da5e34f0d82c92ae132e947084b06991))
+
+
+
 ## [1.5.3](https://github.com/dds/aoc2020/compare/v1.5.2...v1.5.3) (2020-12-02)
 
 
@@ -21,10 +30,6 @@
 ### Features
 
 * short form arguments ([689c01f](https://github.com/dds/aoc2020/commit/689c01f87e11c5015beb591baaa3bf0cbd721e9d))
-
-
-
-## [1.4.1](https://github.com/dds/aoc2020/compare/v1.4.0...v1.4.1) (2020-12-02)
 
 
 
