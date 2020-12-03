@@ -38,7 +38,7 @@ func main() {
 
 func part1(input [][]string) (rc int) {
 	x := 0
-	for y, row := range input {
+	for _, row := range input {
 		n := len(row)
 		if row[x%n] == "#" {
 			rc++
