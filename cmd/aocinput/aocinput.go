@@ -35,7 +35,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(s)
+	fmt.Print(s)
 	if CLI.Clipboard {
 		if err := clipboard.WriteAll(s); err != nil {
 			panic(err)
