@@ -1,3 +1,7 @@
+## [1.6.3](https://github.com/dds/aoc2020/compare/v1.6.2...v1.6.3) (2020-12-03)
+
+
+
 ## [1.6.2](https://github.com/dds/aoc2020/compare/v1.6.1...v1.6.2) (2020-12-03)
 
 
@@ -26,10 +30,6 @@
 ### Bug Fixes
 
 * remove unnecessary additional '\n' ([528bbb8](https://github.com/dds/aoc2020/commit/528bbb82da5e34f0d82c92ae132e947084b06991))
-
-
-
-## [1.5.3](https://github.com/dds/aoc2020/compare/v1.5.2...v1.5.3) (2020-12-02)
 
 
 
