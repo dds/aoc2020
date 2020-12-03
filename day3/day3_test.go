@@ -17,24 +17,23 @@ func TestPath(t *testing.T) {
 	tests := []test{
 		test{
 			p: image.Point{0, 0}, q: image.Point{1, 0},
-			expect: []image.Point{image.Point{0, 0}, image.Point{1, 0}},
+			expect: []image.Point{image.Point{1, 0}},
 		},
 		test{
 			p: image.Point{0, 0}, q: image.Point{0, 1},
-			expect: []image.Point{image.Point{0, 0}, image.Point{0, 1}},
+			expect: []image.Point{image.Point{0, 1}},
 		},
 		test{
 			p: image.Point{0, 0}, q: image.Point{-1, 0},
-			expect: []image.Point{image.Point{0, 0}, image.Point{-1, 0}},
+			expect: []image.Point{image.Point{-1, 0}},
 		},
 		test{
 			p: image.Point{0, 0}, q: image.Point{0, -1},
-			expect: []image.Point{image.Point{0, 0}, image.Point{0, -1}},
+			expect: []image.Point{image.Point{0, -1}},
 		},
 		test{
 			p: image.Point{0, 0}, q: image.Point{3, 7},
 			expect: []image.Point{
-				image.Point{0, 0},
 				image.Point{0, 1},
 				image.Point{0, 2},
 				image.Point{0, 3},
@@ -51,7 +50,7 @@ func TestPath(t *testing.T) {
 
 	for i, test := range tests {
 		t.Run(fmt.Sprint(i), func(t *testing.T) {
-			require.Equal(t, test.expect, path(test.p, test.q))
+			require.Equal(t, test.expect, astar(test.p, test.q))
 		})
 	}
 }

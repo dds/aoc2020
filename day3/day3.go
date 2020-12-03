@@ -110,14 +110,20 @@ func neighbors(p image.Point) (r []image.Point) {
 	return
 }
 
-func distance(p, q image.Point) float64 {
+func taxicab_distance(p, q image.Point) int {
+	r := image.Rectangle{p, q}.Canon()
+	return r.Dx() + r.Dy()
+}
+
+func euclidean_distance(p, q image.Point) float64 {
 	r := image.Rectangle{p, q}
 	return math.Hypot(float64(r.Dy()), float64(r.Dx()))
 }
 
-// Simplified Djikstra's algorithm for the path from p to q.
-func path(p, q image.Point) (r []image.Point) {
+// BFS path from p to q.
+func path(p, q image.Point, cost func(p, q image.Point) float64) (r []image.Point) {
 	que := []image.Point{p}
+	prevs := map[image.Point]image.Point{}
 	for len(que) > 0 {
 		t := que[0]
 		if t == q {
@@ -127,16 +133,30 @@ func path(p, q image.Point) (r []image.Point) {
 		var next image.Point
 		minScore := math.Inf(1)
 		for _, u := range neighbors(t) {
-			score := distance(u, q)
+			if prevs[u] != (image.Point{}) {
+				continue
+			}
+			score := cost(u, q)
 			if score < minScore {
 				minScore = score
 				next = u
 			}
 		}
+		prevs[next] = t
 		que = append(que, next)
-		r = append(r, t)
+		r = append(r, next)
 	}
 	return
+}
+
+// Atar path from p to q.
+func astar(p, q image.Point) (r []image.Point) {
+	return path(p, q, func(p, q image.Point) float64 {
+		if p == q {
+			return 0
+		}
+		return float64(taxicab_distance(p, q)) + euclidean_distance(p, q)
+	})
 }
 
 // Riders
@@ -191,7 +211,7 @@ func foreground(s tcell.Screen, scene int, input [][]string) {
 		// Update the trail along the slope and put rider at the end.
 		rider.Point.Y = scene
 		rider.Point.X = scene * slope.X
-		for _, q := range path(p, rider.Point) {
+		for _, q := range astar(p, rider.Point) {
 			if q.Y == 0 {
 				continue
 			}
