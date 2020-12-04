@@ -31,11 +31,40 @@ func main() {
 		CLI.Year = time.Now().Year()
 	}
 	if CLI.Session == "" {
-		cookies := kooky.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
-		if len(cookies) < 1 {
+		// Try Firefox first because otherwise it prompts for keychain for
+		// Chrome, which I must click to skip to get to Firefox.
+		stores := kooky.FindAllCookieStores()
+		for i, store := range stores {
+			if store.Browser() == "firefox" {
+				stores[i] = stores[len(stores)-1]
+				stores = stores[:len(stores)-1]
+				cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+				if err != nil {
+					ctx.FatalIfErrorf(err)
+				}
+				if len(cookies) < 1 {
+					continue
+				}
+				CLI.Session = cookies[0].Value
+				break
+			}
+		}
+		if CLI.Session == "" {
+			for _, store := range stores {
+				cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+				if err != nil {
+					ctx.FatalIfErrorf(err)
+				}
+				if len(cookies) < 1 {
+					continue
+				}
+				CLI.Session = cookies[0].Value
+				break
+			}
+		}
+		if CLI.Session == "" {
 			ctx.FatalIfErrorf(fmt.Errorf("no session cookie found and none set with --session"))
 		}
-		CLI.Session = cookies[0].Value
 	}
 	deadline := time.Now().Add(CLI.Timeout)
 	s, err := lib.GetInput(CLI.Year, CLI.Day, CLI.Session)
@@ -44,12 +73,12 @@ func main() {
 		s, err = lib.GetInput(CLI.Year, CLI.Day, CLI.Session)
 	}
 	if err != nil {
-		panic(err)
+		ctx.FatalIfErrorf(err)
 	}
 	fmt.Print(s)
 	if CLI.Clipboard {
 		if err := clipboard.WriteAll(s); err != nil {
-			panic(err)
+			ctx.FatalIfErrorf(err)
 		}
 	}
 }
