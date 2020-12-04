@@ -1,3 +1,12 @@
+# [1.8.0](https://github.com/dds/aoc2020/compare/v1.7.2...v1.8.0) (2020-12-04)
+
+
+### Features
+
+* **aocinput:** make --session optional, get from browser ([8910275](https://github.com/dds/aoc2020/commit/891027537151e77f4671ec66d6afcb42f9791f48))
+
+
+
 ## [1.7.2](https://github.com/dds/aoc2020/compare/v1.7.1...v1.7.2) (2020-12-04)
 
 
@@ -16,10 +25,6 @@
 
 
 ## [1.6.8](https://github.com/dds/aoc2020/compare/v1.6.7...v1.6.8) (2020-12-04)
-
-
-
-## [1.6.7](https://github.com/dds/aoc2020/compare/v1.6.6...v1.6.7) (2020-12-04)
 
 
 
