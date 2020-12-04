@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/alecthomas/kong"
@@ -11,14 +12,16 @@ import (
 	"github.com/dds/aoc2020/lib"
 	"github.com/zellyn/kooky"
 	_ "github.com/zellyn/kooky/allbrowsers"
+	"github.com/zellyn/kooky/chrome"
 )
 
 var CLI struct {
-	Clipboard bool          `short:"c" help:"Copy to window system clipboard on success."`
-	Day       int           `kong:"arg,required"`
-	Session   string        `short:"s" help:"Your personal session cookie from your browser."`
-	Timeout   time.Duration `short:"t" help:"Retry up to timeout. Examples: 8h,20s."`
-	Year      int           `short:"y" help:"Year. Default is current year."`
+	Clipboard  bool          `short:"c" help:"Copy to window system clipboard on success."`
+	CookieFile string        `short:"f" help:"File path of Chrome/Chromium cookie jar file."`
+	Day        int           `kong:"arg,required"`
+	Session    string        `short:"s" help:"Your personal session cookie from your browser."`
+	Timeout    time.Duration `short:"t" help:"Retry up to timeout. Examples: 8h,20s."`
+	Year       int           `short:"y" help:"Year. Default is current year."`
 }
 
 func main() {
@@ -29,6 +32,10 @@ func main() {
 	)
 	if CLI.Year == 0 {
 		CLI.Year = time.Now().Year()
+	}
+	if CLI.CookieFile == "" {
+		userdir, _ := os.UserConfigDir()
+		CLI.CookieFile = userdir + "/Google/Chrome/Default/Cookies"
 	}
 	if CLI.Session == "" {
 		stores := kooky.FindAllCookieStores()
@@ -60,7 +67,13 @@ func main() {
 			}
 		}
 		if CLI.Session == "" {
-			ctx.FatalIfErrorf(fmt.Errorf("no session cookie found and none set with --session"))
+			cookies, err := chrome.ReadCookies(CLI.CookieFile, kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+			if err == nil && len(cookies) >= 1 {
+				CLI.Session = cookies[0].Value
+			}
+		}
+		if CLI.Session == "" {
+			ctx.FatalIfErrorf(fmt.Errorf("No session cookie. Must set --session or --cookie-file argument."))
 		}
 	}
 	deadline := time.Now().Add(CLI.Timeout)
