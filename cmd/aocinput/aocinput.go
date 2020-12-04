@@ -39,7 +39,7 @@ func main() {
 	}
 	if CLI.Session == "" {
 		stores := kooky.FindAllCookieStores()
-		cookieOpts := []kooky.Filter{kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode")}
+		cookieOpts := []kooky.Filter{kooky.Valid, kooky.Name("session"), kooky.Domain(".adventofcode.com")}
 		// Try Firefox first because otherwise it prompts for keychain for
 		// Chrome, which I must click to skip to get to Firefox.
 		for _, store := range stores {
