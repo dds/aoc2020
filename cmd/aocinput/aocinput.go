@@ -40,7 +40,7 @@ func main() {
 			}
 			cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
 			if err != nil {
-				ctx.FatalIfErrorf(err)
+				continue
 			}
 			if len(cookies) < 1 {
 				continue
@@ -51,7 +51,7 @@ func main() {
 			for _, store := range stores {
 				cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
 				if err != nil {
-					ctx.FatalIfErrorf(err)
+					continue
 				}
 				if len(cookies) < 1 {
 					continue
