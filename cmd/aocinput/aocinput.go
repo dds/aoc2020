@@ -39,13 +39,14 @@ func main() {
 	}
 	if CLI.Session == "" {
 		stores := kooky.FindAllCookieStores()
+		cookieOpts := []kooky.Filter{kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode")}
 		// Try Firefox first because otherwise it prompts for keychain for
 		// Chrome, which I must click to skip to get to Firefox.
 		for _, store := range stores {
 			if store.Browser() != "firefox" {
 				continue
 			}
-			cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+			cookies, err := store.ReadCookies(cookieOpts...)
 			if err != nil {
 				continue
 			}
@@ -56,7 +57,7 @@ func main() {
 		}
 		if CLI.Session == "" {
 			for _, store := range stores {
-				cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+				cookies, err := store.ReadCookies(cookieOpts...)
 				if err != nil {
 					continue
 				}
@@ -67,7 +68,7 @@ func main() {
 			}
 		}
 		if CLI.Session == "" {
-			cookies, err := chrome.ReadCookies(CLI.CookieFile, kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+			cookies, err := chrome.ReadCookies(CLI.CookieFile, cookieOpts...)
 			if err == nil && len(cookies) >= 1 {
 				CLI.Session = cookies[0].Value
 			}
