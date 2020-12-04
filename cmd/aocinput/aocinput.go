@@ -31,23 +31,21 @@ func main() {
 		CLI.Year = time.Now().Year()
 	}
 	if CLI.Session == "" {
+		stores := kooky.FindAllCookieStores()
 		// Try Firefox first because otherwise it prompts for keychain for
 		// Chrome, which I must click to skip to get to Firefox.
-		stores := kooky.FindAllCookieStores()
-		for i, store := range stores {
-			if store.Browser() == "firefox" {
-				stores[i] = stores[len(stores)-1]
-				stores = stores[:len(stores)-1]
-				cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
-				if err != nil {
-					ctx.FatalIfErrorf(err)
-				}
-				if len(cookies) < 1 {
-					continue
-				}
-				CLI.Session = cookies[0].Value
-				break
+		for _, store := range stores {
+			if store.Browser() != "firefox" {
+				continue
 			}
+			cookies, err := store.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+			if err != nil {
+				ctx.FatalIfErrorf(err)
+			}
+			if len(cookies) < 1 {
+				continue
+			}
+			CLI.Session = cookies[0].Value
 		}
 		if CLI.Session == "" {
 			for _, store := range stores {
@@ -59,7 +57,6 @@ func main() {
 					continue
 				}
 				CLI.Session = cookies[0].Value
-				break
 			}
 		}
 		if CLI.Session == "" {
