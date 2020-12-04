@@ -1,3 +1,7 @@
+## [1.6.5](https://github.com/dds/aoc2020/compare/v1.6.4...v1.6.5) (2020-12-04)
+
+
+
 ## [1.6.4](https://github.com/dds/aoc2020/compare/v1.6.3...v1.6.4) (2020-12-04)
 
 
@@ -21,15 +25,6 @@
 
 
 ## [1.6.1](https://github.com/dds/aoc2020/compare/v1.6.0...v1.6.1) (2020-12-03)
-
-
-
-# [1.6.0](https://github.com/dds/aoc2020/compare/v1.5.4...v1.6.0) (2020-12-03)
-
-
-### Features
-
-* day3 input ([8a873a1](https://github.com/dds/aoc2020/commit/8a873a1c146cdd3b43e200e6d43f7fe5cd035fcc))
 
 
 
