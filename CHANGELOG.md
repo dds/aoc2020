@@ -1,3 +1,7 @@
+## [1.7.1](https://github.com/dds/aoc2020/compare/v1.7.0...v1.7.1) (2020-12-04)
+
+
+
 # [1.7.0](https://github.com/dds/aoc2020/compare/v1.6.8...v1.7.0) (2020-12-04)
 
 
@@ -16,10 +20,6 @@
 
 
 ## [1.6.6](https://github.com/dds/aoc2020/compare/v1.6.5...v1.6.6) (2020-12-04)
-
-
-
-## [1.6.5](https://github.com/dds/aoc2020/compare/v1.6.4...v1.6.5) (2020-12-04)
 
 
 
