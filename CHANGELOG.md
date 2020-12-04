@@ -1,3 +1,7 @@
+## [1.8.8](https://github.com/dds/aoc2020/compare/v1.8.7...v1.8.8) (2020-12-04)
+
+
+
 ## [1.8.7](https://github.com/dds/aoc2020/compare/v1.8.6...v1.8.7) (2020-12-04)
 
 
@@ -16,10 +20,6 @@
 ### Bug Fixes
 
 * allow manually overriding the Chrome cookie jar ([954c542](https://github.com/dds/aoc2020/commit/954c542fc9e9a7f8ea6ab5f2636d8c7bf35bfe64))
-
-
-
-## [1.8.3](https://github.com/dds/aoc2020/compare/v1.8.2...v1.8.3) (2020-12-04)
 
 
 
