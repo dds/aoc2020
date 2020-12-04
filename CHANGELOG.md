@@ -1,3 +1,7 @@
+## [1.8.2](https://github.com/dds/aoc2020/compare/v1.8.1...v1.8.2) (2020-12-04)
+
+
+
 ## [1.8.1](https://github.com/dds/aoc2020/compare/v1.8.0...v1.8.1) (2020-12-04)
 
 
@@ -21,15 +25,6 @@
 
 
 ## [1.7.1](https://github.com/dds/aoc2020/compare/v1.7.0...v1.7.1) (2020-12-04)
-
-
-
-# [1.7.0](https://github.com/dds/aoc2020/compare/v1.6.8...v1.7.0) (2020-12-04)
-
-
-### Features
-
-* **day4:** start ([f3fcadc](https://github.com/dds/aoc2020/commit/f3fcadcc039ee9a8d58378810bfec0281194d2b0))
 
 
 
