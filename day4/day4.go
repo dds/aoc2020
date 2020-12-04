@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
+var Input = lib.ParseInput(inputs.Day4(), strings.Fields)
 
 func Test(t *testing.T) {
 	// type test struct {
@@ -34,11 +35,11 @@ func main() {
 	fmt.Println(part2(Input))
 }
 
-func part1(input [][]int) (rc int) {
+func part1(input [][]string) (rc int) {
 	fmt.Println(input)
 	return
 }
 
-func part2(input [][]int) (rc int) {
+func part2(input [][]string) (rc int) {
 	return
 }
