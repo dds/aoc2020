@@ -1,10 +1,9 @@
-package lib_test
+package lib
 
 import (
 	"fmt"
 	"image"
 
-	"github.com/dds/aoc2020/lib"
 	"github.com/yourbasic/graph"
 	"github.com/yourbasic/graph/build"
 )
@@ -12,11 +11,11 @@ import (
 func ExampleGrid() {
 	// Build a 100x100 grid.
 	n := 100
-	d := lib.Dim(n)
+	d := Dim(n)
 
 	g := build.Grid(n, n).AddCostFunc(func(v, w int) int64 {
 		// Distance to three decimal places.
-		return int64(1000 * lib.Euclid(d.Point(v), d.Point(w)))
+		return int64(1000 * Euclid(d.Point(v), d.Point(w)))
 	})
 
 	// Find a shortest path from (0,0) to (3,7).
