@@ -115,6 +115,41 @@ func background(s tcell.Screen) {
 	}
 }
 
+// Riders
+type rider struct {
+	image.Point
+	tcell.Color
+	glyph rune
+}
+
+var riders = map[image.Point]rider{
+	image.Point{1, 1}: rider{
+		glyph: skier,
+		//   - ff8352 // orange
+		Color: tcell.NewRGBColor(0xFF, 0x83, 0x52),
+	},
+	image.Point{3, 1}: rider{
+		glyph: snowbdr,
+		//   - ffb71c // gold
+		Color: tcell.NewRGBColor(0xFF, 0xB7, 0x1C),
+	},
+	image.Point{5, 1}: rider{
+		glyph: skier,
+		//   - ff461c // red
+		Color: tcell.NewRGBColor(0xFF, 0x46, 0x1c),
+	},
+	image.Point{7, 1}: rider{
+		glyph: skier,
+		//   - 91ff1c // neon green
+		Color: tcell.NewRGBColor(0x91, 0xFF, 0x1C),
+	},
+	image.Point{1, 2}: rider{
+		glyph: snowbdr,
+		//   - ff1c7b // pink
+		Color: tcell.NewRGBColor(0xFF, 0x1C, 0x7B),
+	},
+}
+
 func foreground(s tcell.Screen, scene int, input [][]string) {
 	w, h := s.Size()
 	m := len(input[0])
@@ -126,39 +161,6 @@ func foreground(s tcell.Screen, scene int, input [][]string) {
 				s.SetContent(x, y, tree, nil, style)
 			}
 		}
-	}
-	// Riders
-	type rider struct {
-		image.Point
-		tcell.Color
-		glyph rune
-	}
-	riders := map[image.Point]rider{
-		image.Point{1, 1}: rider{
-			glyph: skier,
-			//   - ff8352 // orange
-			Color: tcell.NewRGBColor(0xFF, 0x83, 0x52),
-		},
-		image.Point{3, 1}: rider{
-			glyph: snowbdr,
-			//   - ffb71c // gold
-			Color: tcell.NewRGBColor(0xFF, 0xB7, 0x1C),
-		},
-		image.Point{5, 1}: rider{
-			glyph: skier,
-			//   - ff461c // red
-			Color: tcell.NewRGBColor(0xFF, 0x46, 0x1c),
-		},
-		image.Point{7, 1}: rider{
-			glyph: skier,
-			//   - 91ff1c // neon green
-			Color: tcell.NewRGBColor(0x91, 0xFF, 0x1C),
-		},
-		image.Point{1, 2}: rider{
-			glyph: snowbdr,
-			//   - ff1c7b // pink
-			Color: tcell.NewRGBColor(0xFF, 0x1C, 0x7B),
-		},
 	}
 	for slope, rider := range riders {
 		// Update the trail along the slope and put rider at the end.
@@ -185,7 +187,7 @@ func shred(input [][]string) {
 			case *tcell.EventResize:
 				sc.Sync()
 			case *tcell.EventKey:
-				if ev.Key() == tcell.KeyEscape {
+				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
 					userquit <- struct{}{}
 				}
 			}
