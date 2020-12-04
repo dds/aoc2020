@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"image"
-	"math"
 	"math/rand"
 	"strings"
+	"testing"
 	"time"
 
 	"github.com/dds/aoc2020/lib"
@@ -14,6 +14,25 @@ import (
 )
 
 var Input = lib.ParseInput(inputs.Day3(), func(s string) []string { return strings.Split(s, "") })
+
+func Test(t *testing.T) {
+	// type test struct {
+	// 	input  int
+	// 	expect int
+	// }
+
+	// tests := []test{
+	// 	test{
+	// 		// ...
+	// 	},
+	// }
+
+	// for i, test := range tests {
+	// 	t.Run(fmt.Sprint(i), func(t *testing.T) {
+	// 		require.Equal(t, test.expect, test.input)
+	// 	})
+	// }
+}
 
 func main() {
 	fmt.Println(part1(Input))
@@ -60,7 +79,7 @@ func part2(input [][]string) (rc int) {
 }
 
 const (
-	trail     = '\\'
+	trail     = '╍'
 	skier     = '⛷'
 	snowbdr   = '🏂'
 	tree      = '🌲'
@@ -96,104 +115,6 @@ func background(s tcell.Screen) {
 	}
 }
 
-var directions = []image.Point{
-	image.Point{0, 1},
-	image.Point{0, -1},
-	image.Point{-1, 0},
-	image.Point{1, 0},
-}
-
-func neighbors(p image.Point) (r []image.Point) {
-	for _, q := range directions {
-		r = append(r, p.Add(q))
-	}
-	return
-}
-
-func taxicab_distance(p, q image.Point) int {
-	r := image.Rectangle{p, q}.Canon()
-	return r.Dx() + r.Dy()
-}
-
-func euclidean_distance(p, q image.Point) float64 {
-	r := image.Rectangle{p, q}
-	return math.Hypot(float64(r.Dy()), float64(r.Dx()))
-}
-
-// BFS path from p to q.
-func path(p, q image.Point, cost func(p, q image.Point) float64) (r []image.Point) {
-	que := []image.Point{p}
-	prevs := map[image.Point]*image.Point{}
-	for len(que) > 0 {
-		t := que[0]
-		if t == q {
-			break
-		}
-		que = que[1:]
-		var next image.Point
-		minScore := math.Inf(1)
-		for _, u := range neighbors(t) {
-			if prevs[u] != nil {
-				continue
-			}
-			score := cost(u, q)
-			if score < minScore {
-				minScore = score
-				next = u
-			}
-		}
-		prevs[next] = &t
-		que = append(que, next)
-		r = append(r, next)
-	}
-	return
-}
-
-// Atar path from p to q.
-func astar(p, q image.Point) (r []image.Point) {
-	return path(p, q, func(p, q image.Point) float64 {
-		if p == q {
-			return 0
-		}
-		return float64(taxicab_distance(p, q)) + euclidean_distance(p, q)
-	})
-}
-
-// Riders
-type rider struct {
-	image.Point
-	tcell.Color
-	glyph rune
-}
-
-var riders = map[image.Point]rider{
-	image.Point{1, 1}: rider{
-		glyph: skier,
-		//   - ff8352 // orange
-		Color: tcell.NewRGBColor(0xFF, 0x83, 0x52),
-	},
-	image.Point{3, 1}: rider{
-		glyph: snowbdr,
-		//   - ffb71c // gold
-		Color: tcell.NewRGBColor(0xFF, 0xB7, 0x1C),
-	},
-	image.Point{5, 1}: rider{
-		glyph: skier,
-		//   - ff461c // red
-		Color: tcell.NewRGBColor(0xFF, 0x46, 0x1c),
-	},
-	image.Point{7, 1}: rider{
-		glyph: skier,
-		//   - 91ff1c // neon green
-		Color: tcell.NewRGBColor(0x91, 0xFF, 0x1C),
-	},
-	image.Point{1, 2}: rider{
-		glyph: snowbdr,
-		//   - ff1c7b // pink
-		Color: tcell.NewRGBColor(0xFF, 0x1C, 0x7B),
-	},
-}
-
 func foreground(s tcell.Screen, scene int, input [][]string) {
 	w, h := s.Size()
 	m := len(input[0])
@@ -206,20 +127,45 @@ func foreground(s tcell.Screen, scene int, input [][]string) {
 			}
 		}
 	}
+	// Riders
+	type rider struct {
+		image.Point
+		tcell.Color
+		glyph rune
+	}
+	riders := map[image.Point]rider{
+		image.Point{1, 1}: rider{
+			glyph: skier,
+			//   - ff8352 // orange
+			Color: tcell.NewRGBColor(0xFF, 0x83, 0x52),
+		},
+		image.Point{3, 1}: rider{
+			glyph: snowbdr,
+			//   - ffb71c // gold
+			Color: tcell.NewRGBColor(0xFF, 0xB7, 0x1C),
+		},
+		image.Point{5, 1}: rider{
+			glyph: skier,
+			//   - ff461c // red
+			Color: tcell.NewRGBColor(0xFF, 0x46, 0x1c),
+		},
+		image.Point{7, 1}: rider{
+			glyph: skier,
+			//   - 91ff1c // neon green
+			Color: tcell.NewRGBColor(0x91, 0xFF, 0x1C),
+		},
+		image.Point{1, 2}: rider{
+			glyph: snowbdr,
+			//   - ff1c7b // pink
+			Color: tcell.NewRGBColor(0xFF, 0x1C, 0x7B),
+		},
+	}
 	for slope, rider := range riders {
-		p := rider.Point
 		// Update the trail along the slope and put rider at the end.
 		rider.Point.Y = scene
 		rider.Point.X = scene * slope.X
-		for _, q := range astar(p, rider.Point) {
-			if q.Y == 0 {
-				continue
-			}
-			_, _, style, _ := s.GetContent(q.X, q.Y)
-			s.SetContent(q.X, q.Y, trail, nil, style.Foreground(rider.Color))
-		}
 		_, _, style, _ := s.GetContent(rider.Point.X, rider.Point.Y)
-		s.SetContent(rider.Point.X, rider.Point.Y, rider.glyph, nil, style)
+		s.SetContent(rider.Point.X, rider.Point.Y, rider.glyph, nil, style.Foreground(rider.Color))
 	}
 }
 
@@ -253,7 +199,7 @@ func shred(input [][]string) {
 	}()
 
 	var (
-		clock = time.Second / 15
+		clock = time.Second / 10
 		timer = time.NewTimer(clock)
 		scene = 0
 	)
