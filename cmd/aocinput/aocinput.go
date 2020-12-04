@@ -9,22 +9,33 @@ import (
 	"github.com/alecthomas/kong"
 	"github.com/atotto/clipboard"
 	"github.com/dds/aoc2020/lib"
+	"github.com/zellyn/kooky"
+	_ "github.com/zellyn/kooky/allbrowsers"
 )
 
 var CLI struct {
 	Clipboard bool          `short:"c" help:"Copy to window system clipboard on success."`
 	Day       int           `kong:"arg,required"`
-	Session   string        `kong:"required,short='s',help='Your personal session cookie from your browser.'"`
+	Session   string        `short:"s" help:"Your personal session cookie from your browser."`
 	Timeout   time.Duration `short:"t" help:"Retry up to timeout. Examples: 8h,20s."`
 	Year      int           `short:"y" help:"Year. Default is current year."`
 }
 
 func main() {
-	kong.Parse(&CLI,
+	ctx := kong.Parse(&CLI,
 		kong.Name("aocinput"),
-		kong.Description("Download Advent of Code Puzzle Inputs"))
+		kong.Description("Download Advent of Code Puzzle Inputs"),
+		kong.UsageOnError(),
+	)
 	if CLI.Year == 0 {
 		CLI.Year = time.Now().Year()
+	}
+	if CLI.Session == "" {
+		cookies := kooky.ReadCookies(kooky.Valid, kooky.Name("session"), kooky.Domain("adventofcode.com"))
+		if len(cookies) < 1 {
+			ctx.FatalIfErrorf(fmt.Errorf("no session cookie found and none set with --session"))
+		}
+		CLI.Session = cookies[0].Value
 	}
 	deadline := time.Now().Add(CLI.Timeout)
 	s, err := lib.GetInput(CLI.Year, CLI.Day, CLI.Session)
