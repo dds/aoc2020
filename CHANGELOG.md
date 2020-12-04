@@ -1,3 +1,7 @@
+## [1.6.7](https://github.com/dds/aoc2020/compare/v1.6.6...v1.6.7) (2020-12-04)
+
+
+
 ## [1.6.6](https://github.com/dds/aoc2020/compare/v1.6.5...v1.6.6) (2020-12-04)
 
 
@@ -16,15 +20,6 @@
 
 
 ## [1.6.3](https://github.com/dds/aoc2020/compare/v1.6.2...v1.6.3) (2020-12-03)
-
-
-
-## [1.6.2](https://github.com/dds/aoc2020/compare/v1.6.1...v1.6.2) (2020-12-03)
-
-
-### Bug Fixes
-
-* **day3:** astar and BFS ([3a1ca89](https://github.com/dds/aoc2020/commit/3a1ca8983ae1ac70e379eb65c5f3e8d0324b7b01))
 
 
 
