@@ -1,3 +1,12 @@
+# [1.7.0](https://github.com/dds/aoc2020/compare/v1.6.8...v1.7.0) (2020-12-04)
+
+
+### Features
+
+* **day4:** start ([f3fcadc](https://github.com/dds/aoc2020/commit/f3fcadcc039ee9a8d58378810bfec0281194d2b0))
+
+
+
 ## [1.6.8](https://github.com/dds/aoc2020/compare/v1.6.7...v1.6.8) (2020-12-04)
 
 
@@ -11,15 +20,6 @@
 
 
 ## [1.6.5](https://github.com/dds/aoc2020/compare/v1.6.4...v1.6.5) (2020-12-04)
-
-
-
-## [1.6.4](https://github.com/dds/aoc2020/compare/v1.6.3...v1.6.4) (2020-12-04)
-
-
-### Reverts
-
-* day3: start adding trails for the riders ([195f00e](https://github.com/dds/aoc2020/commit/195f00e72f7afbaa4aae6216163c7652147a86c5))
 
 
 
