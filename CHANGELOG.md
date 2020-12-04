@@ -1,3 +1,12 @@
+## [1.6.4](https://github.com/dds/aoc2020/compare/v1.6.3...v1.6.4) (2020-12-04)
+
+
+### Reverts
+
+* day3: start adding trails for the riders ([195f00e](https://github.com/dds/aoc2020/commit/195f00e72f7afbaa4aae6216163c7652147a86c5))
+
+
+
 ## [1.6.3](https://github.com/dds/aoc2020/compare/v1.6.2...v1.6.3) (2020-12-03)
 
 
@@ -21,15 +30,6 @@
 ### Features
 
 * day3 input ([8a873a1](https://github.com/dds/aoc2020/commit/8a873a1c146cdd3b43e200e6d43f7fe5cd035fcc))
-
-
-
-## [1.5.4](https://github.com/dds/aoc2020/compare/v1.5.3...v1.5.4) (2020-12-03)
-
-
-### Bug Fixes
-
-* remove unnecessary additional '\n' ([528bbb8](https://github.com/dds/aoc2020/commit/528bbb82da5e34f0d82c92ae132e947084b06991))
 
 
 
