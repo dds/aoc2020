@@ -22,8 +22,10 @@ go get github.com/dds/aoc2020/...
 day1
 
 # Get input for day 20, wait up to 8h, and copy to clipboard if successful
-aocinput 20 --session=<session_cookie> --timeout=8h --clipboard
+aocinput --session=<session_cookie> --timeout 8h --clipboard 20
 
 # Watch the time count down until AoC 2022 Day 1, then display the input and stop.
-watch -n 0.3 -e '! aocinput 1 -y 2022 --session=<session_cookie>'
+watch -n 0.3 -e '! aocinput --session=<session_cookie> 1 -y 2022'
+
+
 ```
