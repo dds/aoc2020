@@ -2,14 +2,14 @@ package main
 
 import "testing"
 
-func BenchmarkPart2(b *testing.B) {
+func BenchmarkPart2SortApproach(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		part2(Input)
 	}
 }
 
-func BenchmarkPart2DictionaryApproach(b *testing.B) {
+func BenchmarkPart2MapAndXorApproach(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		part2_shiftapproach(Input)
