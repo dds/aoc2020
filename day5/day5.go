@@ -34,6 +34,7 @@ func Test(t *testing.T) {
 func main() {
 	fmt.Println(part1(Input))
 	fmt.Println(part2(Input))
+	fmt.Println(part2_shiftapproach(Input))
 }
 
 func part1(input [][]string) (rc int) {
@@ -89,4 +90,33 @@ func part2(input [][]string) (rc int) {
 		}
 	}
 	return
+}
+
+func part2_shiftapproach(input [][]string) (rc int) {
+	ids := map[int]struct{}{}
+	for _, line := range input {
+		rows := line[:7]
+		row := 0
+		for i := 0; i < 7; i++ {
+			switch rows[i] {
+			case "B":
+				row |= 1 << (6 - i)
+			}
+		}
+		seats := line[len(rows):]
+		seat := 0
+		for i := 0; i < 3; i++ {
+			switch seats[i] {
+			case "R":
+				seat |= 1 << (2 - i)
+			}
+		}
+		id := (row << 3) | seat
+		ids[id] = struct{}{}
+	}
+	var r int
+	for k, _ := range ids {
+		r ^= k
+	}
+	return r + 1
 }
