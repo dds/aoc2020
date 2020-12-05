@@ -33,6 +33,7 @@ func Test(t *testing.T) {
 
 func main() {
 	fmt.Println(part1(Input))
+	fmt.Println(part1_ShiftApproach(Input))
 	fmt.Println(part2(Input))
 	fmt.Println(part2_XorApproach(Input))
 }
@@ -57,6 +58,29 @@ func part1(input [][]string) (rc int) {
 		}
 		id := row*8 + seat
 		rc = lib.Max(id, rc)
+	}
+	return
+}
+
+func part1_ShiftApproach(input [][]string) (rc int) {
+	for _, line := range input {
+		rows := line[:7]
+		row := 0
+		for i := 0; i < 7; i++ {
+			switch rows[i] {
+			case "B":
+				row |= 1 << (6 - i)
+			}
+		}
+		seats := line[len(rows):]
+		seat := 0
+		for i := 0; i < 3; i++ {
+			switch seats[i] {
+			case "R":
+				seat |= 1 << (2 - i)
+			}
+		}
+		rc = lib.Max(rc, ((row << 3) | seat))
 	}
 	return
 }
