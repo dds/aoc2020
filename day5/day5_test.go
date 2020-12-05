@@ -12,6 +12,6 @@ func BenchmarkPart2SortApproach(b *testing.B) {
 func BenchmarkPart2MapAndXorApproach(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
-		part2_shiftapproach(Input)
+		part2_MapXorApproach(Input)
 	}
 }

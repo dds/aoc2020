@@ -92,7 +92,7 @@ func part2(input [][]string) (rc int) {
 	return
 }
 
-func part2_shiftapproach(input [][]string) (rc int) {
+func part2_MapXorApproach(input [][]string) (rc int) {
 	ids := map[int]struct{}{}
 	for _, line := range input {
 		rows := line[:7]
