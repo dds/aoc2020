@@ -1,3 +1,7 @@
+## [1.9.4](https://github.com/dds/aoc2020/compare/v1.9.3...v1.9.4) (2020-12-05)
+
+
+
 ## [1.9.3](https://github.com/dds/aoc2020/compare/v1.9.2...v1.9.3) (2020-12-05)
 
 
@@ -16,10 +20,6 @@
 ### Features
 
 * day5 start ([da0c905](https://github.com/dds/aoc2020/commit/da0c905c7d2d5a71565f7d450d77c87ea5036559))
-
-
-
-## [1.8.8](https://github.com/dds/aoc2020/compare/v1.8.7...v1.8.8) (2020-12-04)
 
 
 
