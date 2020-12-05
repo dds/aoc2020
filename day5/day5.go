@@ -34,7 +34,7 @@ func Test(t *testing.T) {
 func main() {
 	fmt.Println(part1(Input))
 	fmt.Println(part2(Input))
-	fmt.Println(part2_shiftapproach(Input))
+	fmt.Println(part2_XorApproach(Input))
 }
 
 func part1(input [][]string) (rc int) {
@@ -92,8 +92,7 @@ func part2(input [][]string) (rc int) {
 	return
 }
 
-func part2_MapXorApproach(input [][]string) (rc int) {
-	ids := map[int]struct{}{}
+func part2_XorApproach(input [][]string) (rc int) {
 	for _, line := range input {
 		rows := line[:7]
 		row := 0
@@ -111,12 +110,7 @@ func part2_MapXorApproach(input [][]string) (rc int) {
 				seat |= 1 << (2 - i)
 			}
 		}
-		id := (row << 3) | seat
-		ids[id] = struct{}{}
+		rc ^= ((row << 3) | seat)
 	}
-	var r int
-	for k, _ := range ids {
-		r ^= k
-	}
-	return r + 1
+	return rc + 1
 }
