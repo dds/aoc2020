@@ -9,7 +9,7 @@ func BenchmarkPart2SortApproach(b *testing.B) {
 	}
 }
 
-func BenchmarkPart2MapAndXorApproach(b *testing.B) {
+func BenchmarkPart2XorApproach(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		part2_XorApproach(Input)
