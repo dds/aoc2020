@@ -40,9 +40,6 @@ func part2(input [][]string) (rc int) {
 		m := map[rune]int{}
 		for _, c := range strings.Join(r, "") {
 			m[c]++
-		}
-		first := r[0]
-		for _, c := range first {
 			if m[c] == len(r) {
 				rc++
 			}
