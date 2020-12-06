@@ -38,10 +38,8 @@ func part1(input [][]string) (rc int) {
 func part2(input [][]string) (rc int) {
 	for _, r := range input {
 		m := map[rune]int{}
-		for _, c := range r {
-			for _, k := range c {
-				m[k]++
-			}
+		for _, c := range strings.Join(r, "") {
+			m[c]++
 		}
 		first := r[0]
 		for _, c := range first {
