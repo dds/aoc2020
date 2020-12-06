@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 	"testing"
 
-	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
@@ -40,18 +38,12 @@ func part1(input [][]string) (rc int) {
 func part2(input [][]string) (rc int) {
 	for _, r := range input {
 		m := map[rune]int{}
-		sortedAnswers := []string{}
-		minLength := 1 << 31
 		for _, c := range r {
-			minLength = lib.Min(len(c), minLength)
-			s := strings.Split(c, "")
-			sort.Strings(s)
-			for _, k := range s {
-				m[rune(k[0])]++
+			for _, k := range c {
+				m[k]++
 			}
-			sortedAnswers = append(sortedAnswers, strings.Join(s, ""))
 		}
-		first := sortedAnswers[0]
+		first := r[0]
 		for _, c := range first {
 			if m[c] == len(r) {
 				rc++
