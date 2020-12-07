@@ -16,7 +16,7 @@ func parse(s string) []string {
 	}
 	bags := strings.Split(parts[1], ", ")
 	r := []string{parts[0]}
-	// Drop the last work from each group.
+	// Drop the last word from each group.
 	for _, b := range bags {
 		t := strings.Fields(b)
 		r = append(r, strings.Join(t[:len(t)-1], " "))
