@@ -40,11 +40,12 @@ func part1(input [][]string) (rc int) {
 		bag := bagQueue[0]
 		bagQueue = bagQueue[1:]
 		for _, u := range m[bag] {
-			if seenBags[u] < 1 {
-				seenBags[u] = 1
-				bagQueue = append(bagQueue, u)
-				rc++
+			if seenBags[u] == 1 {
+				continue
 			}
+			seenBags[u] = 1
+			bagQueue = append(bagQueue, u)
+			rc++
 		}
 	}
 	return
