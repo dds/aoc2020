@@ -1,11 +1,9 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"regexp"
 	"strconv"
-	"time"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
@@ -60,9 +58,10 @@ func part1(input [][]string) (rc int) {
 	return
 }
 
-func run(ctx context.Context, instructions map[int]op) (bool, int) {
+func run(instructions map[int]op) (bool, int) {
 	st := state{}
 
+	seenJumps := map[int]int{}
 	for {
 		if st.stack == len(instructions) {
 			return true, st.accumulator
@@ -75,12 +74,11 @@ func run(ctx context.Context, instructions map[int]op) (bool, int) {
 			st.accumulator += i.arg
 			st.stack++
 		case "jmp":
+			if seenJumps[st.stack] > 0 {
+				return false, 0
+			}
+			seenJumps[st.stack] = 1
 			st.stack += i.arg
-		}
-		select {
-		case <-ctx.Done():
-			return false, 0
-		default:
 		}
 	}
 	return false, 0
@@ -101,8 +99,7 @@ func part2(input [][]string) (rc int) {
 		case "jmp":
 			instructions[k] = op{inst: "nop", arg: v.arg}
 		}
-		ctx, _ := context.WithDeadline(context.Background(), time.Now().Add(10*time.Millisecond))
-		res, acc := run(ctx, instructions)
+		res, acc := run(instructions)
 		if res {
 			return acc
 		}
