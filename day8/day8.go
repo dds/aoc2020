@@ -98,6 +98,8 @@ func part2(input [][]string) (rc int) {
 			instructions[k] = op{inst: "jmp", arg: v.arg}
 		case "jmp":
 			instructions[k] = op{inst: "nop", arg: v.arg}
+		default:
+			continue
 		}
 		res, acc := run(instructions)
 		if res {
