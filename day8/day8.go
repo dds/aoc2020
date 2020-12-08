@@ -53,9 +53,7 @@ func part1(input [][]string) (rc int) {
 		case "jmp":
 			st.stack += i.arg
 		}
-
 	}
-	return
 }
 
 func run(instructions map[int]op) (bool, int) {
@@ -81,7 +79,6 @@ func run(instructions map[int]op) (bool, int) {
 			st.stack += i.arg
 		}
 	}
-	return false, 0
 }
 
 func part2(input [][]string) (rc int) {
