@@ -8,6 +8,13 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func BenchmarkPart1(*testing.B) {
+	part1(Input)
+}
+func BenchmarkPart2(*testing.B) {
+	part2(Input)
+}
+
 func TestPart1(t *testing.T) {
 	type test struct {
 		input  string
