@@ -31,18 +31,6 @@ func part1(input []int) (rc int) {
 	return threes * ones
 }
 
-func factorial() func(n uint64) uint64 {
-	var a, b uint64 = 1, 1
-	return func(n uint64) uint64 {
-		if n <= 1 {
-			return 1
-		}
-		a = b
-		b = uint64(n) * uint64(a)
-		return b
-	}
-}
-
 func part2(input []int) (rc uint64) {
 	sort.Ints(input)
 	input = append([]int{0}, append(input, input[len(input)-1]+3)...)
@@ -50,7 +38,7 @@ func part2(input []int) (rc uint64) {
 	var next func(int) uint64
 	next = func(idx int) uint64 {
 		if m[idx] != 0 {
-			return factorial()(uint64(m[idx]))
+			return m[idx]
 		}
 		if idx == len(input)-1 {
 			return 1
