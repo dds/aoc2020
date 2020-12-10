@@ -2,43 +2,74 @@ package main
 
 import (
 	"fmt"
-	"testing"
+	"sort"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
+func parse(input [][]int) (r []int) {
+	for _, row := range input {
+		r = append(r, row[0])
+	}
+	return
+}
 
-func Test(t *testing.T) {
-	// type test struct {
-	// 	input  int
-	// 	expect int
-	// }
+var Input = parse(lib.InputInts(inputs.Day10(), lib.NumberParser))
 
-	// tests := []test{
-	// 	test{
-	// 		// ...
-	// 	},
-	// }
+func part1(input []int) (rc int) {
+	sort.Ints(input)
+	ones, threes := 1, 1
+	for i := 0; i < len(input)-1; i++ {
+		switch c := input[i+1] - input[i]; c {
+		case 3:
+			threes++
+		case 1:
+			ones++
+		}
+	}
+	return threes * ones
+}
 
-	// for i, test := range tests {
-	// 	t.Run(fmt.Sprint(i), func(t *testing.T) {
-	// 		require.Equal(t, test.expect, test.input)
-	// 	})
-	// }
+func factorial() func(n uint64) uint64 {
+	var a, b uint64 = 1, 1
+	return func(n uint64) uint64 {
+		if n <= 1 {
+			return 1
+		}
+		a = b
+		b = uint64(n) * uint64(a)
+		return b
+	}
+}
+
+func part2(input []int) (rc uint64) {
+	sort.Ints(input)
+	input = append([]int{0}, append(input, input[len(input)-1]+3)...)
+	m := map[int]uint64{}
+	var next func(int) uint64
+	next = func(idx int) uint64 {
+		if m[idx] != 0 {
+			return factorial()(uint64(m[idx]))
+		}
+		if idx == len(input)-1 {
+			return 1
+		}
+		var sum uint64
+		for i := idx + 1; i < len(input); i++ {
+			if input[i]-input[idx] > 3 {
+				break
+			}
+			n := next(i)
+			sum += n
+			m[i] = n
+		}
+		return sum
+	}
+	return next(0)
 }
 
 func main() {
 	fmt.Println(part1(Input))
 	fmt.Println(part2(Input))
-}
-
-func part1(input [][]int) (rc int) {
-	fmt.Println(input)
-	return
-}
-
-func part2(input [][]int) (rc int) {
-	return
 }
