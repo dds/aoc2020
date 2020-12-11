@@ -24,7 +24,7 @@ func Taxi(p, q image.Point) float64 {
 	return float64(r.Dx() + r.Dy())
 }
 
-var directions = []image.Point{
+var Directions = []image.Point{
 	image.Point{0, 1},
 	image.Point{0, -1},
 	image.Point{-1, 0},
@@ -33,7 +33,23 @@ var directions = []image.Point{
 
 // Returns the neighbors up, down, left, and right of P.
 func Neighbors4(p image.Point) (r []image.Point) {
-	for _, q := range directions {
+	for _, q := range Directions {
+		r = append(r, p.Add(q))
+	}
+	return
+}
+
+var Diagnals = []image.Point{
+	image.Point{1, 1},
+	image.Point{1, -1},
+	image.Point{-1, -1},
+	image.Point{-1, 1},
+}
+
+// Returns the neighbors UDLR of P and the diagnals.
+func Neighbors8(p image.Point) (r []image.Point) {
+	r = Neighbors4(p)
+	for _, q := range Diagnals {
 		r = append(r, p.Add(q))
 	}
 	return
@@ -42,7 +58,7 @@ func Neighbors4(p image.Point) (r []image.Point) {
 // Returns 1, 2, 3, or 4 if q is the up, down, left, or right neighbor of P, or
 // 0 otherwise.
 func UDLR(p, q image.Point) int {
-	for i, u := range directions {
+	for i, u := range Directions {
 		if q.Sub(p) == u {
 			return i + 1
 		}
