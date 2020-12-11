@@ -7,6 +7,18 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func BenchmarkPart1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		part1(Input)
+	}
+}
+
+func BenchmarkPart2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		part2(Input)
+	}
+}
+
 func TestPart1(t *testing.T) {
 	type test struct {
 		input  []int
