@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"image"
 	"strings"
+	"time"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
+	"github.com/gdamore/tcell/v2"
 )
 
 var Input = lib.ParseInput(inputs.Day11(), func(s string) []string { return strings.Split(s, "") })
@@ -137,4 +139,65 @@ func part2(input [][]string) (rc int) {
 func main() {
 	fmt.Println(part1(Input))
 	fmt.Println(part2(Input))
+	showPart2(Input)
+}
+
+func showPart2(input [][]string) {
+	sc, err := tcell.NewScreen()
+	if err != nil {
+		panic(err)
+	}
+	if err := sc.Init(); err != nil {
+		panic(err)
+	}
+	sc.Clear()
+	userquit := make(chan struct{})
+	go func() {
+		for {
+			switch ev := sc.PollEvent().(type) {
+			case *tcell.EventResize:
+				sc.Sync()
+			case *tcell.EventKey:
+				if ev.Key() == tcell.KeyEscape || ev.Key() == tcell.KeyCtrlC {
+					userquit <- struct{}{}
+				}
+			}
+		}
+	}()
+	defer func() {
+		sc.Fini()
+		if err := recover(); err != nil {
+			panic(err)
+		}
+	}()
+
+	g := grid{g: map[image.Point]string{}}
+	for y := 0; y < len(input); y++ {
+		for x := 0; x < len(input[y]); x++ {
+			g.w = lib.Max(g.w, x)
+			g.h = lib.Max(g.h, y)
+			g.g[image.Point{x, y}] = input[y][x]
+		}
+	}
+	var (
+		clock = time.Second / 10
+		timer = time.NewTimer(clock)
+		k     = 1
+	)
+	for k != 0 {
+		timer.Reset(clock)
+		sc.Clear()
+		for p, s := range g.g {
+			_, _, style, _ := sc.GetContent(p.X, p.Y)
+			sc.SetContent(p.X, p.Y, rune(s[0]), nil, style)
+		}
+		sc.Show()
+		select {
+		case <-userquit:
+			break
+		case <-timer.C:
+		}
+		k = g.round2()
+	}
+	sc.Fini()
 }
