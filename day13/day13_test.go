@@ -107,8 +107,6 @@ func TestPart2(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(fmt.Sprint(i), func(t *testing.T) {
-			s := parse(test.input)
-			buses := s.buses()
 			r := part2(test.input)
 			require.Equal(t, test.expect, r, fmt.Sprintf("%d %d", test.expect, r))
 			fmt.Println(test.expect)
