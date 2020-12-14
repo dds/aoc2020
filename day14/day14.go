@@ -48,7 +48,6 @@ type prog struct {
 func (p prog) and(i int) (r int) {
 	r = i
 	for i, c := range p.mask {
-		// Big endian
 		pos := len(p.mask) - 1 - i
 		if c == 'X' {
 			continue
@@ -83,7 +82,6 @@ func (p prog) decode(i int) (r []int) {
 	z := i
 	floats := []int{}
 	for i, c := range p.mask {
-		// Big endian
 		pos := len(p.mask) - 1 - i
 		switch c {
 		case 'X':
