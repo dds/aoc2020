@@ -4,8 +4,23 @@ import (
 	"fmt"
 	"testing"
 
+	"github.com/dds/aoc2020/lib/inputs"
 	"github.com/stretchr/testify/require"
 )
+
+func BenchmarkSliceApproach(b *testing.B) {
+	input := parse(inputs.Day15())
+	for i := 0; i < b.N; i++ {
+		solveSliceApproach(input, 30000000)
+	}
+}
+
+func BenchmarkIntApproach(b *testing.B) {
+	input := parse(inputs.Day15())
+	for i := 0; i < b.N; i++ {
+		solveIntApproach(input, 30000000)
+	}
+}
 
 func TestPart1(t *testing.T) {
 	type test struct {
