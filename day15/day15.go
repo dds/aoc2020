@@ -20,26 +20,24 @@ var Input = parse(inputs.Day15())
 
 func solve(input []int, limit int) (rc int) {
 	m := map[int][]int{}
-	said := []int(input)
 	for i, x := range input {
 		m[x] = append(m[x], i)
 	}
-	i := len(said) - 1
+	i := len(input) - 1
+	t := input[len(input)-1]
 	for i < limit {
-		t := said[i]
 		i++
 		if seen := m[t]; len(seen) < 2 {
-			said = append(said, 0)
+			t = 0
 			m[0] = append(m[0], i)
 			continue
 		}
 		n := len(m[t]) // number of times we have seen this item
 		m[t] = []int{m[t][n-2], m[t][n-1]}
-		d := m[t][1] - m[t][0] // how many turns apart
-		said = append(said, d)
-		m[d] = append(m[d], i)
+		t = m[t][1] - m[t][0] // how many turns apart
+		m[t] = append(m[t], i)
 	}
-	return said[limit]
+	return t
 }
 
 func part1(input []int) (rc int) {
