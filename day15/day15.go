@@ -24,7 +24,7 @@ func solve(input []int, limit int) (rc int) {
 		m[x] = append(m[x], i)
 	}
 	i := len(input) - 1
-	t := input[len(input)-1]
+	t := input[i]
 	for i < limit {
 		i++
 		if seen := m[t]; len(seen) < 2 {
