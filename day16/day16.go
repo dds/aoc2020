@@ -90,6 +90,19 @@ func (s rules) valid(i int) bool {
 
 type ticket []int
 
+func (s rules) filter(tickets []ticket) (r []ticket) {
+t:
+	for _, t := range tickets {
+		for _, pos := range t {
+			if !s.valid(pos) {
+				continue t
+			}
+		}
+		r = append(r, t)
+	}
+	return
+}
+
 func part1(in input) (rc int) {
 	for _, t := range in.nearby {
 		for _, field := range t {
@@ -102,17 +115,7 @@ func part1(in input) (rc int) {
 }
 
 func part2(in input, prefix string) (rc int) {
-	filtered := []ticket{}
-ticket:
-	for _, t := range in.nearby {
-		for _, field := range t {
-			if !in.rules.valid(field) {
-				continue ticket
-			}
-		}
-		filtered = append(filtered, t)
-	}
-	in.nearby = filtered
+	in.nearby = in.rules.filter(in.nearby)
 
 	fields := []string{}
 	for k := range in.rules {
