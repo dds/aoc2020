@@ -153,17 +153,18 @@ ticket:
 	}
 	in.nearby = filtered
 
-	var fieldOrder []string
 	possibleOrderings := in.rules.perms()
-nearby:
-	for _, ord := range possibleOrderings {
-		for _, t := range in.nearby {
-			if !in.rules.possible(t, ord) {
-				continue nearby
+	i := 0
+	fieldOrder := possibleOrderings[i]
+
+	for _, t := range in.nearby {
+		for {
+			if !in.rules.possible(t, fieldOrder) {
+				i++
+				fieldOrder = possibleOrderings[i]
 			}
+			break
 		}
-		fieldOrder = ord
-		break
 	}
 
 	rc = 1
