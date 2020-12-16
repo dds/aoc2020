@@ -102,44 +102,6 @@ func part1(in input) (rc int) {
 	return
 }
 
-// Generate all permutations.
-// For each permutation, find the first line that is impossible and continue
-// Return the ordering that succeeded
-
-func (s rules) perms() (r [][]string) {
-	fields := make([]string, len(s))
-	i := 0
-	for k, _ := range s {
-		fields[i] = k
-		i++
-	}
-
-	var perm func([]string, int)
-	perm = func(f []string, i int) {
-		if i == len(f) {
-			r = append(r, append([]string{}, f...))
-			return
-		}
-		for j := i; j < len(f); j++ {
-			f[i], f[j] = f[j], f[i]
-			perm(f, i+1)
-			f[i], f[j] = f[j], f[i]
-		}
-		return
-	}
-	perm(fields, 0)
-	return
-}
-
-func (s rules) possible(t ticket, ordering []string) bool {
-	for i, field := range ordering {
-		if !s[field].valid(t[i]) {
-			return false
-		}
-	}
-	return true
-}
-
 func part2(in input, prefix string) (rc int) {
 	filtered := []ticket{}
 ticket:
@@ -153,18 +115,51 @@ ticket:
 	}
 	in.nearby = filtered
 
-	possibleOrderings := in.rules.perms()
-	i := 0
-	fieldOrder := possibleOrderings[i]
+	fields := []string{}
+	for k := range in.rules {
+		fields = append(fields, k)
+	}
 
+	// 1. Construct a map for each position in your ticket to a list of possible fields.
+	m := map[int]map[string]struct{}{}
+	for i := range in.yours {
+		m[i] = map[string]struct{}{}
+		for _, k := range fields {
+			m[i][k] = struct{}{}
+		}
+	}
 	for _, t := range in.nearby {
-		for {
-			if !in.rules.possible(t, fieldOrder) {
-				i++
-				fieldOrder = possibleOrderings[i]
+		for x, v := range t {
+			for k, r := range in.rules {
+				if !r.valid(v) {
+					delete(m[x], k)
+				}
+			}
+		}
+	}
+	fieldOrder := map[int]string{}
+
+	for {
+		// 2. Loop: if we have found all fields, exit loop.
+		if len(fieldOrder) == len(fields) {
+			break
+		}
+		//   a. Find a position in some ticket that can only be represented by a single field; that field's position is known.
+		var field string
+		for pos, candidates := range m {
+			if len(candidates) != 1 {
 				continue
 			}
+			for k := range candidates {
+				field = k
+				break
+			}
+			fieldOrder[pos] = field
 			break
+		}
+		//   b. Remove that field from every ticket's possible field list.
+		for _, candidates := range m {
+			delete(candidates, field)
 		}
 	}
 
