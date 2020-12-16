@@ -94,7 +94,6 @@ func part1(in input) (rc int) {
 	for _, t := range in.nearby {
 		for _, field := range t {
 			if !in.rules.valid(field) {
-				fmt.Printf("invalid %v\n", field)
 				rc += field
 			}
 		}
@@ -120,7 +119,7 @@ ticket:
 		fields = append(fields, k)
 	}
 
-	// 1. Construct a map for each position in your ticket to a list of possible fields.
+	// Construct a map for each position in your ticket to a list of possible fields.
 	m := map[int]map[string]struct{}{}
 	for i := range in.yours {
 		m[i] = map[string]struct{}{}
@@ -137,14 +136,12 @@ ticket:
 			}
 		}
 	}
+	// Desired result: map of position to field.
 	fieldOrder := map[int]string{}
 
-	for {
-		// 2. Loop: if we have found all fields, exit loop.
-		if len(fieldOrder) == len(fields) {
-			break
-		}
-		//   a. Find a position in some ticket that can only be represented by a single field; that field's position is known.
+	// Loop: if we have found all fields, exit loop.
+	for len(fieldOrder) != len(fields) {
+		// Find a position in some ticket that can only be represented by a single field.
 		var field string
 		for pos, candidates := range m {
 			if len(candidates) != 1 {
@@ -157,7 +154,7 @@ ticket:
 			fieldOrder[pos] = field
 			break
 		}
-		//   b. Remove that field from every ticket's possible field list.
+		// Remove that field from every ticket's possible field list.
 		for _, candidates := range m {
 			delete(candidates, field)
 		}
