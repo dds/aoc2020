@@ -162,6 +162,7 @@ ticket:
 			if !in.rules.possible(t, fieldOrder) {
 				i++
 				fieldOrder = possibleOrderings[i]
+				continue
 			}
 			break
 		}
