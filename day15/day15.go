@@ -51,9 +51,9 @@ func solveIntApproach(input []int, limit int) (rc int) {
 	t := input[len(input)-1]
 	i := len(input)
 	fmt.Println(input)
+	var a, b int
 	for i < limit {
 		i++
-		var a, b int
 		if m[t]>>32 == 0 {
 			t = 0
 		} else {
