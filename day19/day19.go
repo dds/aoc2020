@@ -2,43 +2,66 @@ package main
 
 import (
 	"fmt"
-	"testing"
+	"regexp"
+	"strconv"
+	"strings"
 
-	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
+var Input = inputs.Day19()
 
-func Test(t *testing.T) {
-	// type test struct {
-	// 	input  int
-	// 	expect int
-	// }
+func part1(in string) (rc int) {
+	p := parse(in)
+	fmt.Println(p.rules)
+	return
+}
 
-	// tests := []test{
-	// 	test{
-	// 		// ...
-	// 	},
-	// }
+func parse(in string) (r input) {
+	parts := strings.Split(in, "\n\n")
+	rules, _ := parts[0], parts[1]
+	r.rules = parseRules(rules)
+	// r.msgs = parseMsgs(messages)
+	return
+}
 
-	// for i, test := range tests {
-	// 	t.Run(fmt.Sprint(i), func(t *testing.T) {
-	// 		require.Equal(t, test.expect, test.input)
-	// 	})
-	// }
+type input struct {
+	rules rules
+	msgs  []msg
+}
+
+var ruleRE = regexp.MustCompile(`^(\d+): (.*)$`)
+
+func parseRules(in string) (r rules) {
+	lines := strings.Split(in, "\n")
+	r = make(rules, len(lines))
+	for _, l := range lines {
+		matches := ruleRE.FindStringSubmatch(l)
+		if len(matches) == 0 {
+			continue
+		}
+		n, _ := strconv.Atoi(matches[1])
+		r[n] = rule(matches[2])
+	}
+	return
+}
+
+type rules []rule
+
+func (s rules) String() (r string) {
+	r += "["
+	c := []string{}
+	for _, l := range s {
+		c = append(c, fmt.Sprintf("%q", l))
+	}
+	r += strings.Join(c, ", ") + "]"
+	return
+}
+
+type rule string
+type msg struct {
 }
 
 func main() {
 	fmt.Println(part1(Input))
-	fmt.Println(part2(Input))
-}
-
-func part1(input [][]int) (rc int) {
-	fmt.Println(input)
-	return
-}
-
-func part2(input [][]int) (rc int) {
-	return
 }
