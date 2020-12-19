@@ -38,3 +38,39 @@ func TestPart1(t *testing.T) {
 		})
 	}
 }
+
+func TestPart2(t *testing.T) {
+	type test struct {
+		input  string
+		expect int
+	}
+
+	tests := []test{
+		test{
+			input:  `2 * 3 + (4 * 5)`,
+			expect: 46,
+		},
+		test{
+			input:  `1 + (2 * 3) + (4 * (5 + 6))`,
+			expect: 51,
+		},
+		test{
+			input:  `5 + (8 * 3 + 9 + 3 * 4 * 3)`,
+			expect: 1445,
+		},
+		test{
+			input:  `5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))`,
+			expect: 669060,
+		},
+		test{
+			input:  `((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2`,
+			expect: 23340,
+		},
+	}
+
+	for i, test := range tests {
+		t.Run(fmt.Sprint(i), func(t *testing.T) {
+			require.Equal(t, test.expect, part2(test.input))
+		})
+	}
+}
