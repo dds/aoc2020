@@ -17,6 +17,11 @@ func part1(in string) (rc int) {
 	keys := tiles.keys()
 	sort.Ints(keys)
 	rc = 1
+	key := keys[0]
+	fmt.Println("all orientations of tile ", key)
+	for _, q := range tiles[key].orientations() {
+		fmt.Println(q)
+	}
 	return
 }
 
@@ -128,13 +133,9 @@ func (t tile) rotations() (r []tile) {
 	return
 }
 
-// Returns all possible oritentations of the tile.
-func (t tile) orientations() (r []tile) {
-	r = []tile{t, t.flip()}
-	for _, q := range t.rotations() {
-		r = append(r, q)
-	}
-	return
+// Returns all possible orientations of the tile.
+func (t tile) orientations() []tile {
+	return append(append([]tile{t, t.flip()}, t.rotations()...), t.flip().rotations()...)
 }
 
 func main() {
