@@ -46,8 +46,7 @@ func (q rules) regex(rule string) string {
 
 func parse(in string) (r input) {
 	parts := strings.Split(in, "\n\n")
-	rules, _ := parts[0], parts[1]
-	r.rules = parseRules(rules)
+	r.rules = parseRules(parts[0])
 	r.msgs = parts[1]
 	return
 }
