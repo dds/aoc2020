@@ -2,43 +2,142 @@ package main
 
 import (
 	"fmt"
-	"testing"
+	"image"
+	"regexp"
+	"sort"
+	"strconv"
+	"strings"
 
 	"github.com/dds/aoc2020/lib"
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
-var Input = lib.InputInts(inputs.TestInput1(), lib.NumberParser)
+func part1(in string) (rc int) {
+	tiles := parse(in)
+	keys := tiles.keys()
+	sort.Ints(keys)
+	rc = 1
+	return
+}
 
-func Test(t *testing.T) {
-	// type test struct {
-	// 	input  int
-	// 	expect int
-	// }
+type tiles map[int]tile
 
-	// tests := []test{
-	// 	test{
-	// 		// ...
-	// 	},
-	// }
+func (s tiles) keys() (r []int) {
+	for k, _ := range s {
+		r = append(r, k)
+	}
+	return
+}
 
-	// for i, test := range tests {
-	// 	t.Run(fmt.Sprint(i), func(t *testing.T) {
-	// 		require.Equal(t, test.expect, test.input)
-	// 	})
-	// }
+func parse(in string) (r tiles) {
+	r = tiles{}
+	for _, s := range strings.Split(in, "\n\n") {
+		id, tile := parseTile(s)
+		r[id] = tile
+	}
+	return
+}
+
+var tilehdr = regexp.MustCompile(`^Tile (\d+):`)
+
+func parseTile(s string) (id int, t tile) {
+	if !tilehdr.MatchString(s) {
+		panic(fmt.Errorf("no tile header: %v", s))
+	}
+	ids := tilehdr.FindStringSubmatch(s)[1]
+	id, _ = strconv.Atoi(ids)
+	t = tile{m: map[image.Point]string{}}
+	rows := strings.Split(s, "\n")[1:]
+	n := 0
+	for y, row := range rows {
+		if len(row) == 0 {
+			continue
+		}
+		for x, c := range row {
+			t.m[image.Pt(x, y)] = string(c)
+		}
+		n = lib.Max(n, y)
+	}
+	t.n = n + 1
+	return
+}
+
+type tile struct {
+	m map[image.Point]string
+	n int
+}
+
+func (t tile) String() (r string) {
+	for i := 0; i < t.n; i++ {
+		for j := 0; j < t.n; j++ {
+			r += t.m[image.Pt(j, i)]
+		}
+		r += "\n"
+	}
+	return
+}
+
+func (t tile) north() (r string) {
+	for i := 0; i < t.n; i++ {
+		r += t.m[image.Pt(i, 0)]
+	}
+	return
+}
+
+func (t tile) south() (r string) {
+	for i := 0; i < t.n; i++ {
+		r += t.m[image.Pt(i, t.n-1)]
+	}
+	return
+}
+
+func (t tile) east() (r string) {
+	for i := 0; i < t.n; i++ {
+		r += t.m[image.Pt(t.n-1, i)]
+	}
+	return
+}
+
+func (t tile) west() (r string) {
+	for i := 0; i < t.n; i++ {
+		r += t.m[image.Pt(0, i)]
+	}
+	return
+}
+
+// Flipping a tile produces its mirror image tile.
+func (t tile) flip() (q tile) {
+	q = tile{m: map[image.Point]string{}, n: t.n}
+	for pt, s := range t.m {
+		q.m[image.Pt(t.n-1-pt.X, pt.Y)] = s
+	}
+	return
+}
+
+// Rotations returns the tile rotated 90, 180, and 270 degrees.
+func (t tile) rotations() (r []tile) {
+	r = make([]tile, 3)
+	r[0] = tile{m: map[image.Point]string{}, n: t.n}
+	r[1] = tile{m: map[image.Point]string{}, n: t.n}
+	r[2] = tile{m: map[image.Point]string{}, n: t.n}
+	for pt, s := range t.m {
+		r[0].m[image.Pt(t.n-1-pt.Y, pt.X)] = s
+		r[1].m[image.Pt(t.n-1-pt.X, t.n-1-pt.Y)] = s
+		r[2].m[image.Pt(pt.Y, t.n-1-pt.X)] = s
+	}
+	return
+}
+
+// Returns all possible oritentations of the tile.
+func (t tile) orientations() (r []tile) {
+	r = []tile{t, t.flip()}
+	for _, q := range t.rotations() {
+		r = append(r, q)
+	}
+	return
 }
 
 func main() {
-	fmt.Println(part1(Input))
-	fmt.Println(part2(Input))
-}
-
-func part1(input [][]int) (rc int) {
-	fmt.Println(input)
-	return
-}
-
-func part2(input [][]int) (rc int) {
-	return
+	fmt.Println(part1(inputs.Day20()))
+	// fmt.Println(part2(Input))
 }
