@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"math"
 	"regexp"
 	"sort"
 	"strconv"
@@ -12,13 +13,16 @@ import (
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
+// Solution based on http://chenlab.ece.cornell.edu/people/Andy/publications/Andy_files/Gallagher_cvpr2012_puzzleAssembly.pdf
 func part1(in string) (rc int) {
 	tiles := parse(in)
 	keys := tiles.keys()
+	size := int(math.Sqrt(float64(len(keys))))
+	fmt.Println("Assuming square image with side length", size)
 	sort.Ints(keys)
 	rc = 1
 	key := keys[0]
-	fmt.Println("all orientations of tile ", key)
+	fmt.Println("all orientations of tile", tiles[key].id)
 	for _, q := range tiles[key].orientations() {
 		fmt.Println(q)
 	}
@@ -64,12 +68,14 @@ func parseTile(s string) (id int, t tile) {
 		n = lib.Max(n, y)
 	}
 	t.n = n + 1
+	t.id = id
 	return
 }
 
 type tile struct {
-	m map[image.Point]string
-	n int
+	m  map[image.Point]string
+	n  int
+	id int
 }
 
 func (t tile) String() (r string) {
@@ -82,37 +88,21 @@ func (t tile) String() (r string) {
 	return
 }
 
-func (t tile) north() (r string) {
+// Returns the north, south, east, and west borders as strings.
+func (t tile) borders() (r []string) {
+	r = make([]string, 4)
 	for i := 0; i < t.n; i++ {
-		r += t.m[image.Pt(i, 0)]
-	}
-	return
-}
-
-func (t tile) south() (r string) {
-	for i := 0; i < t.n; i++ {
-		r += t.m[image.Pt(i, t.n-1)]
-	}
-	return
-}
-
-func (t tile) east() (r string) {
-	for i := 0; i < t.n; i++ {
-		r += t.m[image.Pt(t.n-1, i)]
-	}
-	return
-}
-
-func (t tile) west() (r string) {
-	for i := 0; i < t.n; i++ {
-		r += t.m[image.Pt(0, i)]
+		r[0] += t.m[image.Pt(i, 0)]
+		r[1] += t.m[image.Pt(i, t.n-1)]
+		r[2] += t.m[image.Pt(t.n-1, i)]
+		r[3] += t.m[image.Pt(0, i)]
 	}
 	return
 }
 
 // Flipping a tile produces its mirror image tile.
 func (t tile) flip() (q tile) {
-	q = tile{m: map[image.Point]string{}, n: t.n}
+	q = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
 	for pt, s := range t.m {
 		q.m[image.Pt(t.n-1-pt.X, pt.Y)] = s
 	}
@@ -122,9 +112,9 @@ func (t tile) flip() (q tile) {
 // Rotations returns the tile rotated 90, 180, and 270 degrees.
 func (t tile) rotations() (r []tile) {
 	r = make([]tile, 3)
-	r[0] = tile{m: map[image.Point]string{}, n: t.n}
-	r[1] = tile{m: map[image.Point]string{}, n: t.n}
-	r[2] = tile{m: map[image.Point]string{}, n: t.n}
+	r[0] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
+	r[1] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
+	r[2] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
 	for pt, s := range t.m {
 		r[0].m[image.Pt(t.n-1-pt.Y, pt.X)] = s
 		r[1].m[image.Pt(t.n-1-pt.X, t.n-1-pt.Y)] = s
