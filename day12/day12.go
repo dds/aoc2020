@@ -89,7 +89,6 @@ func part2(input [][]string) (rc int) {
 	p := image.Point{}
 	wpt := image.Point{10, 1}
 	for _, row := range input {
-		c, w := p, wpt
 		d, ns := row[0], row[1]
 		n, _ := strconv.Atoi(ns)
 		dir := 0
@@ -111,7 +110,6 @@ func part2(input [][]string) (rc int) {
 		case "F":
 			p = p.Add(wpt.Mul(n))
 		}
-		fmt.Println(c, "=>", p, w, "=>", wpt)
 	}
 	return int(lib.Taxi(p, image.Point{}))
 }
