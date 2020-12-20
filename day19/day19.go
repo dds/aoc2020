@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/dds/aoc2020/lib/inputs"
@@ -13,55 +12,67 @@ var Input = inputs.Day19()
 
 func part1(in string) (rc int) {
 	p := parse(in)
-	fmt.Println(p.rules)
-	return
+	re := regexp.MustCompile(`(?m)^` + p.rules.regex("0") + `$`)
+	return len(re.FindAllString(p.msgs, -1))
+}
+
+func part2(in string) (rc int) {
+	p := parse(in)
+	p.rules["8"] = `"` + p.rules.regex("42") + `+"`
+	p.rules["11"] = ""
+	for i := 1; i < 11; i++ {
+		p.rules["11"] += fmt.Sprintf("|%s{%d}%s{%d}", p.rules.regex("42"), i, p.rules.regex("31"), i)
+	}
+	p.rules["11"] = `"(?:` + p.rules["11"][1:] + `)"`
+	re := regexp.MustCompile(`(?m)^` + p.rules.regex("0") + `$`)
+	return len(re.FindAllString(p.msgs, -1))
+}
+
+func (q rules) regex(rule string) string {
+	if q[rule][0] == '"' {
+		return q[rule][1 : len(q[rule])-1]
+	}
+	re := ""
+	for _, s := range strings.Split(q[rule], " | ") {
+		re += "|"
+		for _, s := range strings.Fields(s) {
+			re += q.regex(s)
+		}
+	}
+	return `(?:` + re[1:] + `)`
 }
 
 func parse(in string) (r input) {
 	parts := strings.Split(in, "\n\n")
 	rules, _ := parts[0], parts[1]
 	r.rules = parseRules(rules)
-	// r.msgs = parseMsgs(messages)
+	r.msgs = parts[1]
 	return
 }
 
 type input struct {
 	rules rules
-	msgs  []msg
+	msgs  string
 }
 
 var ruleRE = regexp.MustCompile(`^(\d+): (.*)$`)
 
 func parseRules(in string) (r rules) {
 	lines := strings.Split(in, "\n")
-	r = make(rules, len(lines))
+	r = make(rules)
 	for _, l := range lines {
 		matches := ruleRE.FindStringSubmatch(l)
 		if len(matches) == 0 {
 			continue
 		}
-		n, _ := strconv.Atoi(matches[1])
-		r[n] = rule(matches[2])
+		r[matches[1]] = matches[2]
 	}
 	return
 }
 
-type rules []rule
-
-func (s rules) String() (r string) {
-	r += "["
-	c := []string{}
-	for _, l := range s {
-		c = append(c, fmt.Sprintf("%q", l))
-	}
-	r += strings.Join(c, ", ") + "]"
-	return
-}
-
-type rule string
-type msg struct {
-}
+type rules map[string]string
 
 func main() {
 	fmt.Println(part1(Input))
+	fmt.Println(part2(Input))
 }
