@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/dds/aoc2020/lib/inputs"
@@ -24,6 +25,7 @@ func part2(in string) (rc int) {
 		p.rules["11"] += fmt.Sprintf("|%s{%d}%s{%d}", p.rules.regex("42"), i, p.rules.regex("31"), i)
 	}
 	p.rules["11"] = `"(?:` + p.rules["11"][1:] + `)"`
+	fmt.Println(p.rules)
 	re := regexp.MustCompile(`(?m)^` + p.rules.regex("0") + `$`)
 	return len(re.FindAllString(p.msgs, -1))
 }
@@ -71,6 +73,17 @@ func parseRules(in string) (r rules) {
 }
 
 type rules map[string]string
+
+func (s rules) String() (r string) {
+	r += "{\n"
+	c := make([]string, len(s))
+	for i, l := range s {
+		n, _ := strconv.Atoi(i)
+		c[n] = fmt.Sprintf("%v: %q", i, l)
+	}
+	r += strings.Join(c, "\n") + "\n}"
+	return
+}
 
 func main() {
 	fmt.Println(part1(Input))
