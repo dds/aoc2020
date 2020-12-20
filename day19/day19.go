@@ -60,7 +60,7 @@ var ruleRE = regexp.MustCompile(`^(\d+): (.*)$`)
 
 func parseRules(in string) (r rules) {
 	lines := strings.Split(in, "\n")
-	r = make(rules)
+	r = rules{}
 	for _, l := range lines {
 		matches := ruleRE.FindStringSubmatch(l)
 		if len(matches) == 0 {
