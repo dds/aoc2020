@@ -13,18 +13,96 @@ import (
 	"github.com/dds/aoc2020/lib/inputs"
 )
 
+func main() {
+	fmt.Println(part1(inputs.Day20()))
+	fmt.Println(part2(inputs.Day20()))
+}
+
 // Solution based on http://chenlab.ece.cornell.edu/people/Andy/publications/Andy_files/Gallagher_cvpr2012_puzzleAssembly.pdf
 func part1(in string) (rc int) {
 	tiles := parse(in)
 	keys := tiles.keys()
-	size := int(math.Sqrt(float64(len(keys))))
-	fmt.Println("Assuming square image with side length", size)
 	sort.Ints(keys)
+
 	rc = 1
-	key := keys[0]
-	fmt.Println("all orientations of tile", tiles[key].id)
-	for _, q := range tiles[key].orientations() {
-		fmt.Println(q)
+	dim := lib.Dim(math.Sqrt(float64(len(tiles))))
+	fmt.Println("Building square image with side length", dim)
+
+	for a, m := range tiles.allComparisons() {
+		// Corner pieces have two matches each with at least one edge.
+		matches := 0
+		for _, c := range m {
+			if len(c.toMap()) >= 1 {
+				matches++
+			}
+		}
+		if matches == 2 {
+			rc *= a
+		}
+	}
+	return
+}
+
+func part2(in string) (rc int) {
+	tiles := parse(in)
+	keys := tiles.keys()
+	sort.Ints(keys)
+
+	rc = 1
+	return
+}
+
+func (s tiles) allComparisons() (r map[int]map[int]comparison) {
+	r = map[int]map[int]comparison{}
+	for id, t := range s {
+		r[id] = map[int]comparison{}
+		for oid, q := range s {
+			if id == oid {
+				continue
+			}
+			r[id][oid] = t.compare(q)
+		}
+	}
+	return
+}
+
+// Score how well tile q fits tile t by comparing all possible connections.
+// Returns a map of int representing a possible orientation between p and q to a
+// bool of whether that orientation fits.
+func (t tile) compare(q tile) (r comparison) {
+	r = comparison{}
+	// The tile can fit to the right, left, top, or bottom. The other tile can
+	// be arbitrarily rotated or flipped. For each border of this tile, for each
+	// permutation of the other tile, compare if the corresponding border in the
+	// other tile matches. Return a map of orientation possibility to bool of
+	// match or no match.
+	borderPairs := [][]int{
+		[]int{1, 0},
+		[]int{0, 1},
+		[]int{3, 2},
+		[]int{2, 3},
+	}
+	b := t.borders()
+	i := 0
+	for _, q := range q.orientations() {
+		d := q.borders()
+		for _, p := range borderPairs {
+			r[i] = b[p[0]] == d[p[1]]
+			i++
+		}
+	}
+	return
+}
+
+type comparison [48]bool
+
+func (c comparison) toMap() (r map[int]bool) {
+	r = map[int]bool{}
+	for i, c := range c {
+		if !c {
+			continue
+		}
+		r[i] = c
 	}
 	return
 }
@@ -32,7 +110,7 @@ func part1(in string) (rc int) {
 type tiles map[int]tile
 
 func (s tiles) keys() (r []int) {
-	for k, _ := range s {
+	for k := range s {
 		r = append(r, k)
 	}
 	return
@@ -73,9 +151,14 @@ func parseTile(s string) (id int, t tile) {
 }
 
 type tile struct {
-	m  map[image.Point]string
-	n  int
-	id int
+	m     map[image.Point]string
+	n, id int
+	o     orientation
+}
+
+type orientation struct {
+	flip int // 0, 1, 2: none, horizontal, vertical
+	rot  int // 0, 1, 2, 3: none, 90, 180, 270
 }
 
 func (t tile) String() (r string) {
@@ -100,11 +183,14 @@ func (t tile) borders() (r []string) {
 	return
 }
 
-// Flipping a tile produces its mirror image tile.
-func (t tile) flip() (q tile) {
-	q = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
+// Flipping a tile produces flips it horizontally and verticaly.
+func (t tile) flips() (r []tile) {
+	r = make([]tile, 2)
+	r[0] = tile{m: map[image.Point]string{}, n: t.n, id: t.id, o: orientation{flip: 1, rot: t.o.rot}}
+	r[1] = tile{m: map[image.Point]string{}, n: t.n, id: t.id, o: orientation{flip: 2, rot: t.o.rot}}
 	for pt, s := range t.m {
-		q.m[image.Pt(t.n-1-pt.X, pt.Y)] = s
+		r[0].m[image.Pt(t.n-1-pt.X, pt.Y)] = s
+		r[1].m[image.Pt(pt.X, t.n-1-pt.Y)] = s
 	}
 	return
 }
@@ -112,9 +198,9 @@ func (t tile) flip() (q tile) {
 // Rotations returns the tile rotated 90, 180, and 270 degrees.
 func (t tile) rotations() (r []tile) {
 	r = make([]tile, 3)
-	r[0] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
-	r[1] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
-	r[2] = tile{m: map[image.Point]string{}, n: t.n, id: t.id}
+	r[0] = tile{m: map[image.Point]string{}, n: t.n, id: t.id, o: orientation{flip: t.o.flip, rot: 1}}
+	r[1] = tile{m: map[image.Point]string{}, n: t.n, id: t.id, o: orientation{flip: t.o.flip, rot: 2}}
+	r[2] = tile{m: map[image.Point]string{}, n: t.n, id: t.id, o: orientation{flip: t.o.flip, rot: 3}}
 	for pt, s := range t.m {
 		r[0].m[image.Pt(t.n-1-pt.Y, pt.X)] = s
 		r[1].m[image.Pt(t.n-1-pt.X, t.n-1-pt.Y)] = s
@@ -124,11 +210,10 @@ func (t tile) rotations() (r []tile) {
 }
 
 // Returns all possible orientations of the tile.
-func (t tile) orientations() []tile {
-	return append(append([]tile{t, t.flip()}, t.rotations()...), t.flip().rotations()...)
-}
-
-func main() {
-	fmt.Println(part1(inputs.Day20()))
-	// fmt.Println(part2(Input))
+func (t tile) orientations() (r []tile) {
+	r = append(append([]tile{t}, t.flips()...), t.rotations()...)
+	for _, t := range t.flips() {
+		r = append(r, t.rotations()...)
+	}
+	return
 }
