@@ -1,4 +1,4 @@
-# Advent of Code 2020 (Golang) 
+# Advent of Code 2020 (Golang)
 
 [![Build Status](https://github.com/dds/aoc2020/workflows/ci/badge.svg)](https://github.com/dds/aoc2020/actions?query=workflow%3Aci)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
