@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/alecthomas/kong v0.2.15
-	github.com/atotto/clipboard v0.1.3
+	github.com/atotto/clipboard v0.1.4
 	github.com/gdamore/tcell/v2 v2.2.0
 	github.com/stretchr/testify v1.7.0
 	github.com/yourbasic/graph v0.0.0-20170921192928-40eb135c0b26
