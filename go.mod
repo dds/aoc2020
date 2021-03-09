@@ -3,7 +3,7 @@ module github.com/dds/aoc2020
 go 1.15
 
 require (
-	github.com/alecthomas/kong v0.2.15
+	github.com/alecthomas/kong v0.2.16
 	github.com/atotto/clipboard v0.1.4
 	github.com/gdamore/tcell/v2 v2.2.0
 	github.com/stretchr/testify v1.7.0
