@@ -1,3 +1,12 @@
+## [1.9.56](https://github.com/dds/aoc2020/compare/v1.9.55...v1.9.56) (2021-03-09)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/alecthomas/kong to v0.2.16 ([a41706b](https://github.com/dds/aoc2020/commit/a41706bc7dce6d30cf8e4936a737559c2c36da77))
+
+
+
 ## [1.9.55](https://github.com/dds/aoc2020/compare/v1.9.54...v1.9.55) (2021-02-24)
 
 
@@ -26,10 +35,6 @@
 
 
 ## [1.9.52](https://github.com/dds/aoc2020/compare/v1.9.51...v1.9.52) (2021-02-11)
-
-
-
-## [1.9.51](https://github.com/dds/aoc2020/compare/v1.9.50...v1.9.51) (2021-01-31)
 
 
 
