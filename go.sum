@@ -61,8 +61,8 @@ github.com/yourbasic/graph v0.0.0-20170921192928-40eb135c0b26 h1:4u7nCRnWizT8R6x
 github.com/yourbasic/graph v0.0.0-20170921192928-40eb135c0b26/go.mod h1:Rfzr+sqaDreiCaoQbFCu3sTXxeFq/9kXRuyOoSlGQHE=
 github.com/zalando/go-keyring v0.1.0 h1:ffq972Aoa4iHNzBlUHgK5Y+k8+r/8GvcGd80/OFZb/k=
 github.com/zalando/go-keyring v0.1.0/go.mod h1:RaxNwUITJaHVdQ0VC7pELPZ3tOWn13nr0gZMZEhpVU0=
-github.com/zellyn/kooky v0.0.0-20201108220156-bec09c12c339 h1:girtxC8UoQF7GzkSkC3BAggcsH6Zl6b9nqsn5iLEM/U=
-github.com/zellyn/kooky v0.0.0-20201108220156-bec09c12c339/go.mod h1:QM4+3a3KkwFXtuTz+w41LBKU+MW7KecHBn0bNalcPKA=
+github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f h1:Oxzmfe0Xoum87EDOWZkTZKVkhDnArW8t1OQ3KnYT600=
+github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f/go.mod h1:QM4+3a3KkwFXtuTz+w41LBKU+MW7KecHBn0bNalcPKA=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/crypto v0.0.0-20200323165209-0ec3e9974c59/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
 golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod h1:LzIPMQfyMNhhGPhUkYOs5KpL4U8rLKemX1yGLhDgUto=
