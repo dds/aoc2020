@@ -8,5 +8,5 @@ require (
 	github.com/gdamore/tcell/v2 v2.2.0
 	github.com/stretchr/testify v1.7.0
 	github.com/yourbasic/graph v0.0.0-20170921192928-40eb135c0b26
-	github.com/zellyn/kooky v0.0.0-20201108220156-bec09c12c339
+	github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f
 )
