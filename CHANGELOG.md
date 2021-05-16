@@ -1,3 +1,12 @@
+## [1.9.60](https://github.com/dds/aoc2020/compare/v1.9.59...v1.9.60) (2021-05-16)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/gdamore/tcell/v2 to v2.3.0 ([f057e25](https://github.com/dds/aoc2020/commit/f057e25a1be3e0d38ba1d3ba8fd0a0181e2d1a3e))
+
+
+
 ## [1.9.59](https://github.com/dds/aoc2020/compare/v1.9.58...v1.9.59) (2021-04-18)
 
 
@@ -26,15 +35,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/alecthomas/kong to v0.2.16 ([a41706b](https://github.com/dds/aoc2020/commit/a41706bc7dce6d30cf8e4936a737559c2c36da77))
-
-
-
-## [1.9.55](https://github.com/dds/aoc2020/compare/v1.9.54...v1.9.55) (2021-02-24)
-
-
-### Bug Fixes
-
-* **deps:** update module github.com/atotto/clipboard to v0.1.4 ([8dbb86f](https://github.com/dds/aoc2020/commit/8dbb86f74a48143290905df9267005703269a495))
 
 
 
