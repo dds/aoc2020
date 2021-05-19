@@ -1,3 +1,12 @@
+## [1.9.63](https://github.com/dds/aoc2020/compare/v1.9.62...v1.9.63) (2021-05-19)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/gdamore/tcell/v2 to v2.3.3 ([df9594c](https://github.com/dds/aoc2020/commit/df9594c8437a3ffb64c2cd9d31634700f7229891))
+
+
+
 ## [1.9.62](https://github.com/dds/aoc2020/compare/v1.9.61...v1.9.62) (2021-05-19)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/gdamore/tcell/v2 to v2.2.1 ([d091df9](https://github.com/dds/aoc2020/commit/d091df9dd928dd0fe877f4a1ff3386a8664d2d4f))
-
-
-
-## [1.9.58](https://github.com/dds/aoc2020/compare/v1.9.57...v1.9.58) (2021-04-08)
-
-
-### Bug Fixes
-
-* **deps:** update github.com/zellyn/kooky commit hash to 87b89e9 ([f84d6b9](https://github.com/dds/aoc2020/commit/f84d6b926d40bf8a1911f5dfb07121f3eda58802))
 
 
 
