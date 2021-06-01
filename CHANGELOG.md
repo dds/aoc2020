@@ -1,3 +1,12 @@
+## [1.9.64](https://github.com/dds/aoc2020/compare/v1.9.63...v1.9.64) (2021-06-01)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/gdamore/tcell/v2 to v2.3.5 ([4d77005](https://github.com/dds/aoc2020/commit/4d770054b0eaba85b03d17c9021b906f2d3f5d9d))
+
+
+
 ## [1.9.63](https://github.com/dds/aoc2020/compare/v1.9.62...v1.9.63) (2021-05-19)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/gdamore/tcell/v2 to v2.3.0 ([f057e25](https://github.com/dds/aoc2020/commit/f057e25a1be3e0d38ba1d3ba8fd0a0181e2d1a3e))
-
-
-
-## [1.9.59](https://github.com/dds/aoc2020/compare/v1.9.58...v1.9.59) (2021-04-18)
-
-
-### Bug Fixes
-
-* **deps:** update module github.com/gdamore/tcell/v2 to v2.2.1 ([d091df9](https://github.com/dds/aoc2020/commit/d091df9dd928dd0fe877f4a1ff3386a8664d2d4f))
 
 
 
