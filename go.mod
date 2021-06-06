@@ -7,6 +7,6 @@ require (
 	github.com/atotto/clipboard v0.1.4
 	github.com/gdamore/tcell/v2 v2.3.9
 	github.com/stretchr/testify v1.7.0
-	github.com/yourbasic/graph v0.0.0-20170921192928-40eb135c0b26
+	github.com/yourbasic/graph v0.0.0-20210606180040-8ecfec1c2869
 	github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f
 )
