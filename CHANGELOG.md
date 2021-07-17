@@ -1,3 +1,12 @@
+## [1.9.72](https://github.com/dds/aoc2020/compare/v1.9.71...v1.9.72) (2021-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/gdamore/tcell/v2 to v2.4.0 ([fed4ea9](https://github.com/dds/aoc2020/commit/fed4ea9f12583ca349274991dc1ed6d649474244))
+
+
+
 ## [1.9.71](https://github.com/dds/aoc2020/compare/v1.9.70...v1.9.71) (2021-06-10)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * **deps:** update github.com/yourbasic/graph commit hash to 8ecfec1 ([d64f3a3](https://github.com/dds/aoc2020/commit/d64f3a3bc33185322a59d81728a91ceba7d64ac1))
-
-
-
-## [1.9.67](https://github.com/dds/aoc2020/compare/v1.9.66...v1.9.67) (2021-06-05)
-
-
-### Bug Fixes
-
-* **deps:** update module github.com/gdamore/tcell/v2 to v2.3.9 ([7f7179d](https://github.com/dds/aoc2020/commit/7f7179d43db7e6f8c4260b527e7a3392bc570d32))
 
 
 
