@@ -1,3 +1,12 @@
+## [1.9.73](https://github.com/dds/aoc2020/compare/v1.9.72...v1.9.73) (2022-04-25)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/stretchr/testify to v1.7.1 ([2ae4116](https://github.com/dds/aoc2020/commit/2ae41160aeb79fb0695f33307731dfe60a81c9af))
+
+
+
 ## [1.9.72](https://github.com/dds/aoc2020/compare/v1.9.71...v1.9.72) (2021-07-17)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/alecthomas/kong to v0.2.17 ([b31cf46](https://github.com/dds/aoc2020/commit/b31cf4652da4518a312346cfa40a0e7266a4ffa6))
-
-
-
-## [1.9.68](https://github.com/dds/aoc2020/compare/v1.9.67...v1.9.68) (2021-06-06)
-
-
-### Bug Fixes
-
-* **deps:** update github.com/yourbasic/graph commit hash to 8ecfec1 ([d64f3a3](https://github.com/dds/aoc2020/commit/d64f3a3bc33185322a59d81728a91ceba7d64ac1))
 
 
 
