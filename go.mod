@@ -1,6 +1,6 @@
 module github.com/dds/aoc2020
 
-go 1.15
+go 1.19
 
 require (
 	github.com/alecthomas/kong v0.6.1
