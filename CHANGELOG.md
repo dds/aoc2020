@@ -1,3 +1,7 @@
+## [1.9.89](https://github.com/dds/aoc2020/compare/v1.9.88...v1.9.89) (2026-01-09)
+
+
+
 ## [1.9.88](https://github.com/dds/aoc2020/compare/v1.9.87...v1.9.88) (2026-01-09)
 
 
@@ -31,15 +35,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/alecthomas/kong to v0.9.0 ([#46](https://github.com/dds/aoc2020/issues/46)) ([95762c3](https://github.com/dds/aoc2020/commit/95762c3f3201c7c0b07f70f1f4ffeec1ddf14da8))
-
-
-
-## [1.9.84](https://github.com/dds/aoc2020/compare/v1.9.83...v1.9.84) (2022-08-20)
-
-
-### Bug Fixes
-
-* **deps:** update module github.com/gdamore/tcell/v2 to v2.5.3 ([f155535](https://github.com/dds/aoc2020/commit/f15553508ad657aa3aa2f77d65e5486b5fecab8e))
 
 
 
