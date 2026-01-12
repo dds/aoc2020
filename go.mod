@@ -10,7 +10,7 @@ require (
 	github.com/gdamore/tcell/v2 v2.13.7
 	github.com/stretchr/testify v1.11.1
 	github.com/yourbasic/graph v0.0.0-20210606180040-8ecfec1c2869
-	github.com/zellyn/kooky v0.0.0-20210408152652-87b89e95f98f
+	github.com/zellyn/kooky v0.2.4
 )
 
 require (
