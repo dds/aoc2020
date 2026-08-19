@@ -1,3 +1,12 @@
+## [1.9.99](https://github.com/dds/aoc2020/compare/v1.9.98...v1.9.99) (2026-08-19)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([#74](https://github.com/dds/aoc2020/issues/74)) ([7e29d33](https://github.com/dds/aoc2020/commit/7e29d33e6cf22feceb63b536968602eeb580fcb1))
+
+
+
 ## [1.9.98](https://github.com/dds/aoc2020/compare/v1.9.97...v1.9.98) (2026-08-17)
 
 
@@ -21,10 +30,6 @@
 ### Bug Fixes
 
 * **deps:** update module github.com/gdamore/tcell/v2 to v2.13.10 ([#68](https://github.com/dds/aoc2020/issues/68)) ([d57a8e3](https://github.com/dds/aoc2020/commit/d57a8e376f46d4a4276a921d374987042614f866))
-
-
-
-## [1.9.94](https://github.com/dds/aoc2020/compare/v1.9.93...v1.9.94) (2026-05-08)
 
 
 
