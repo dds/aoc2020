@@ -2,7 +2,7 @@ module github.com/dds/aoc2020
 
 go 1.24.0
 
-toolchain go1.26.6
+toolchain go1.27.0
 
 require (
 	github.com/alecthomas/kong v0.9.0
