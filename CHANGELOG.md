@@ -1,3 +1,7 @@
+## [1.9.101](https://github.com/dds/aoc2020/compare/v1.9.100...v1.9.101) (2026-09-02)
+
+
+
 ## [1.9.100](https://github.com/dds/aoc2020/compare/v1.9.99...v1.9.100) (2026-08-20)
 
 
@@ -21,10 +25,6 @@
 
 
 ## [1.9.97](https://github.com/dds/aoc2020/compare/v1.9.96...v1.9.97) (2026-08-14)
-
-
-
-## [1.9.96](https://github.com/dds/aoc2020/compare/v1.9.95...v1.9.96) (2026-06-03)
 
 
 
